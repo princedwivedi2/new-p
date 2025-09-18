@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -25,188 +25,512 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 <body>
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress"></div>
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
-    
     <!-- Particles Background -->
     <div id="tsparticles"></div>
 
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <!-- Enhanced Navigation -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-logo">
-                <span class="logo-text">Prince</span>
+                <div class="logo-container">
+                    <span class="logo-text">Prince</span>
+                    <div class="logo-accent"></div>
+                </div>
             </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
+            <div class="nav-menu" id="nav-menu" role="menubar">
+                <a href="#home" class="nav-link active" role="menuitem" aria-current="page" data-section="home">
+                    <span class="nav-text">Home</span>
+                    <div class="nav-indicator"></div>
+                </a>
+                <a href="#about" class="nav-link" role="menuitem" data-section="about">
+                    <span class="nav-text">About</span>
+                    <div class="nav-indicator"></div>
+                </a>
+                <a href="#skills" class="nav-link" role="menuitem" data-section="skills">
+                    <span class="nav-text">Skills</span>
+                    <div class="nav-indicator"></div>
+                </a>
+                <a href="#projects" class="nav-link" role="menuitem" data-section="projects">
+                    <span class="nav-text">Projects</span>
+                    <div class="nav-indicator"></div>
+                </a>
+                <a href="#contact" class="nav-link" role="menuitem" data-section="contact">
+                    <span class="nav-text">Contact</span>
+                    <div class="nav-indicator"></div>
+                </a>
+                <a href="#contact" class="nav-cta glass-btn" role="menuitem" aria-label="Contact me to work together">
+                    <span class="cta-text">Work With Me</span>
+                    <div class="cta-glow"></div>
+                </a>
             </div>
             <div class="nav-controls">
-                <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">
-                    <i class="fas fa-moon" id="theme-icon"></i>
+                <button class="theme-toggle glass-control" id="theme-toggle" title="Toggle between light and dark mode" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon" id="theme-icon" aria-hidden="true"></i>
+                    <div class="control-ripple"></div>
                 </button>
-            <div class="hamburger" id="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+                <div class="hamburger glass-control" id="hamburger" role="button" aria-label="Toggle navigation menu" aria-expanded="false" tabindex="0">
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                    <div class="control-ripple"></div>
+                </div>
             </div>
-        </div>
+        </div> <!-- .nav-container (closed) -->
+        <div class="nav-progress" id="nav-progress"></div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Main Content -->
+    <main id="main-content">
+
+    <!-- Enhanced Hero Section -->
     <section id="home" class="hero">
         <div class="hero-container">
+            <!-- Hero Background Elements -->
+            <div class="hero-bg-elements">
+                <div class="floating-orb orb-1"></div>
+                <div class="floating-orb orb-2"></div>
+                <div class="floating-orb orb-3"></div>
+                <div class="hero-grid"></div>
+            </div>
+
             <div class="hero-content">
                 <div class="hero-text">
+                    <!-- Status Badge -->
+                    <div class="hero-status">
+                        <div class="status-badge">
+                            <div class="status-dot"></div>
+                            <span>Available for work</span>
+                        </div>
+                    </div>
+
+                    <!-- Main Greeting -->
+                    <div class="hero-greeting">
+                        <span class="greeting-text">Hello, I'm</span>
+                        <div class="greeting-line"></div>
+                    </div>
+
+                    <!-- Name with Animation -->
                     <h1 class="hero-title">
-                        <span class="title-line">Hi, I'm</span>
-                        <span class="title-name">Prince</span>
-                        <span class="title-role" id="typewriter"></span>
+                        <div class="title-container">
+                            <span class="title-name" data-text="Prince Dwivedi">Prince Dwivedi</span>
+                            <div class="title-underline"></div>
+                        </div>
                     </h1>
-                    <p class="hero-description">
-                        Passionate and results-driven Full Stack Developer specializing in PHP (Laravel) for backend development. 
-                        I craft modern, responsive web applications with solid experience in building scalable solutions.
-                    </p>
-                    <div class="hero-location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Lucknow, Uttar Pradesh</span>
+
+                    <!-- Dynamic Tagline -->
+                    <div class="hero-tagline">
+                        <h2 class="tagline-container">
+                            <span class="tagline-static">I'm a</span>
+                            <span class="tagline-dynamic">
+                                <span class="title-role" id="typewriter">Full-Stack Developer</span>
+                                <span class="typewriter-cursor">|</span>
+                            </span>
+                        </h2>
                     </div>
-                    <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">
-                            <i class="fas fa-code"></i>
-                            <span>View My Work</span>
-                        </a>
-                        <a href="#contact" class="btn btn-secondary">
-                            <i class="fas fa-envelope"></i>
-                            <span>Get In Touch</span>
-                        </a>
+
+                    <!-- Enhanced Subtitle -->
+                    <div class="hero-description">
+                        <p class="hero-subtitle">
+                            Crafting beautiful, functional, and user-centered digital experiences 
+                            that bridge the gap between <span class="highlight">design</span> and <span class="highlight">technology</span>
+                        </p>
                     </div>
+
+                    <!-- Location & CTA Section -->
+                    <div class="hero-actions">
+                        <div class="hero-location">
+                            <div class="location-container">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Lucknow, Uttar Pradesh, India</span>
+                                <div class="location-pulse"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-ctas">
+                            <a href="#contact" class="btn btn-primary glass-btn">
+                                <span class="btn-text">
+                                    <i class="fas fa-envelope"></i>
+                                    Get In Touch
+                                </span>
+                                <div class="btn-glow"></div>
+                            </a>
+                            <a href="#projects" class="btn btn-outline glass-btn">
+                                <span class="btn-text">
+                                    <i class="fas fa-code"></i>
+                                    View My Work
+                                </span>
+                                <div class="btn-glow"></div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Enhanced Social Links -->
                     <div class="hero-social">
-                        <a href="https://github.com/princedwivedi2" class="social-icon" data-aos="fade-up" data-aos-delay="100" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="#" class="social-icon" data-aos="fade-up" data-aos-delay="200" title="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="tel:+918954539547" class="social-icon" data-aos="fade-up" data-aos-delay="300" title="Phone">
-                            <i class="fas fa-phone"></i>
-                        </a>
-                        <a href="#" class="social-icon" data-aos="fade-up" data-aos-delay="400">
-                            <i class="fab fa-dribbble"></i>
-                        </a>
+                        <div class="social-container">
+                            <span class="social-label">Connect with me</span>
+                            <div class="social-links">
+                                <a href="https://github.com/princedwivedi2" class="social-icon glass-social" title="GitHub" data-platform="github">
+                                    <i class="fab fa-github"></i>
+                                    <span class="social-tooltip">GitHub</span>
+                                </a>
+                                <a href="#" class="social-icon glass-social" title="LinkedIn" data-platform="linkedin">
+                                    <i class="fab fa-linkedin"></i>
+                                    <span class="social-tooltip">LinkedIn</span>
+                                </a>
+                                <a href="tel:+918954539547" class="social-icon glass-social" title="Phone" data-platform="phone">
+                                    <i class="fas fa-phone"></i>
+                                    <span class="social-tooltip">Call Me</span>
+                                </a>
+                                <a href="#" class="social-icon glass-social" title="Dribbble" data-platform="dribbble">
+                                    <i class="fab fa-dribbble"></i>
+                                    <span class="social-tooltip">Dribbble</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Enhanced Hero Image -->
                 <div class="hero-image">
                     <div class="profile-container">
+                        <!-- Main Profile -->
                         <div class="profile-wrapper">
-                            <img src="assets/3d-casual-life-smiling-man-with-laptop-waving-hand.png" alt="Developer Avatar" class="profile-img">
+                            <div class="profile-border"></div>
+                            <img src="assets/3d-casual-life-smiling-man-with-laptop-waving-hand.png" 
+                                 alt="Prince Dwivedi - Professional 3D avatar of a friendly developer with laptop, representing modern web development expertise" 
+                                 class="profile-img"
+                                 loading="lazy"
+                                 width="320" 
+                                 height="320">
                             <div class="profile-glow"></div>
+                            <div class="profile-ring"></div>
                         </div>
+
+                        <!-- Enhanced Floating Icons -->
                         <div class="floating-icons">
-                            <div class="floating-icon icon-1">
+                            <div class="floating-icon icon-1" data-tech="React">
                                 <img src="https://img.icons8.com/color/48/react-native.png" alt="React">
+                                <div class="icon-glow"></div>
                             </div>
-                            <div class="floating-icon icon-2">
+                            <div class="floating-icon icon-2" data-tech="Node.js">
                                 <img src="https://img.icons8.com/color/48/nodejs.png" alt="Node.js">
+                                <div class="icon-glow"></div>
                             </div>
-                            <div class="floating-icon icon-3">
+                            <div class="floating-icon icon-3" data-tech="JavaScript">
                                 <img src="https://img.icons8.com/color/48/javascript.png" alt="JavaScript">
+                                <div class="icon-glow"></div>
                             </div>
-                            <div class="floating-icon icon-4">
+                            <div class="floating-icon icon-4" data-tech="Python">
                                 <img src="https://img.icons8.com/color/48/python.png" alt="Python">
+                                <div class="icon-glow"></div>
                             </div>
-                            <div class="floating-icon icon-5">
+                            <div class="floating-icon icon-5" data-tech="HTML5">
                                 <img src="https://img.icons8.com/color/48/html-5.png" alt="HTML5">
+                                <div class="icon-glow"></div>
                             </div>
-                            <div class="floating-icon icon-6">
+                            <div class="floating-icon icon-6" data-tech="CSS3">
                                 <img src="https://img.icons8.com/color/48/css3.png" alt="CSS3">
+                                <div class="icon-glow"></div>
+                            </div>
+                        </div>
+
+                        <!-- Tech Stats Cards -->
+                        <div class="tech-stats">
+                            <div class="stat-card stat-1">
+                                <div class="stat-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <span class="stat-number">15+</span>
+                                    <span class="stat-label">Projects</span>
+                                </div>
+                            </div>
+                            <div class="stat-card stat-2">
+                                <div class="stat-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <span class="stat-number">2+</span>
+                                    <span class="stat-label">Years</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="hero-scroll">
-            <span>Scroll Down</span>
-            <div class="scroll-arrow"></div>
-        </div>
+
+        <!-- Enhanced Background Shapes -->
         <div class="hero-shapes">
             <div class="shape shape-1"></div>
             <div class="shape shape-2"></div>
             <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-text">Scroll to explore</div>
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Enhanced About Section -->
     <section id="about" class="about">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge">
+                    <span>About Me</span>
+                </div>
+                <h2 class="section-title">
+                    Passionate Developer & <span class="highlight">Creative Thinker</span>
+                </h2>
                 <div class="section-line"></div>
+                <p class="section-subtitle">
+                    Crafting digital experiences with passion, precision, and purpose
+                </p>
             </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <div class="about-card">
-                        <h3>Who Am I?</h3>
-                        <p>
-                            I'm a passionate Full Stack Developer specializing in PHP (Laravel) for backend development 
-                            with solid experience in building modern, responsive web applications. I excel in crafting 
-                            REST APIs, database design, and dynamic frontend interfaces.
-                        </p>
-                        <p>
-                            Proficient in React, Next.js, and Tailwind CSS with expertise in real-time communication 
-                            via WebSockets, user authentication using Clerk, and NoSQL solutions like MongoDB. 
-                            A team player with keen interest in scalable architecture and clean code.
-                        </p>
-                        <div class="stats">
-                            <div class="stat" data-aos="fade-up" data-aos-delay="100">
-                                <h4 class="counter" data-target="15">0</h4>
-                                <p>Projects Completed</p>
+            
+            <div class="about-layout">
+                <!-- About Main Content -->
+                <div class="about-main" data-aos="fade-right">
+                    <div class="about-card glass-card">
+                        <!-- Journey Timeline -->
+                        <div class="journey-section">
+                            <h3 class="card-title">
+                                <i class="fas fa-route"></i> My Journey
+                            </h3>
+                            <div class="timeline">
+                                <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <h4>Started Programming</h4>
+                                        <span class="timeline-date">2022</span>
+                                        <p>Discovered my passion for coding and began learning web development fundamentals</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <h4>First Full-Stack Project</h4>
+                                        <span class="timeline-date">2023</span>
+                                        <p>Built my first complete web application using React and Node.js</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                                    <div class="timeline-marker active"></div>
+                                    <div class="timeline-content">
+                                        <h4>Professional Developer</h4>
+                                        <span class="timeline-date">2024 - Present</span>
+                                        <p>Working on diverse projects, constantly learning and growing in the field</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="stat" data-aos="fade-up" data-aos-delay="200">
-                                <h4 class="counter" data-target="2">0</h4>
-                                <p>Years Experience</p>
-                            </div>
-                            <div class="stat" data-aos="fade-up" data-aos-delay="300">
-                                <h4 class="counter" data-target="8">0</h4>
-                                <p>Happy Clients</p>
+                        </div>
+
+                        <!-- Philosophy -->
+                        <div class="philosophy-section">
+                            <h3 class="card-title">
+                                <i class="fas fa-heart"></i> My Philosophy
+                            </h3>
+                            <div class="philosophy-content">
+                                <p class="philosophy-quote">
+                                    "Great code is like poetry—it should be elegant, meaningful, and solve real problems."
+                                </p>
+                                <p>
+                                    Every line I write is crafted with the user in mind, because technology should 
+                                    enhance human experience, not complicate it. I believe in the power of clean, 
+                                    scalable code that stands the test of time.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="about-services">
-                    <div class="service-card" data-aos="fade-left" data-aos-delay="100">
-                        <div class="service-icon">
-                            <img src="assets/3d-business-guy-with-backpack-and-laptop.png" alt="Laravel Development">
+
+                <!-- About Sidebar -->
+                <div class="about-sidebar">
+                    <!-- Enhanced Stats -->
+                    <div class="stats-container" data-aos="fade-left" data-aos-delay="100">
+                        <h3 class="sidebar-title">By the Numbers</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div class="stat-data">
+                                    <h4 class="counter" data-target="15">0</h4>
+                                    <p>Projects Completed</p>
+                                    <div class="stat-bar">
+                                        <div class="stat-progress" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                                <div class="stat-data">
+                                    <h4 class="counter" data-target="2">0</h4>
+                                    <p>Years Experience</p>
+                                    <div class="stat-bar">
+                                        <div class="stat-progress" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-smile"></i>
+                                </div>
+                                <div class="stat-data">
+                                    <h4 class="counter" data-target="8">0</h4>
+                                    <p>Happy Clients</p>
+                                    <div class="stat-bar">
+                                        <div class="stat-progress" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-coffee"></i>
+                                </div>
+                                <div class="stat-data">
+                                    <h4 class="counter" data-target="200">0</h4>
+                                    <p>Cups of Coffee</p>
+                                    <div class="stat-bar">
+                                        <div class="stat-progress" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Core Values -->
+                    <div class="values-container" data-aos="fade-left" data-aos-delay="200">
+                        <h3 class="sidebar-title">What Drives Me</h3>
+                        <div class="values-list">
+                            <div class="value-item">
+                                <div class="value-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="value-content">
+                                    <h4>Innovation</h4>
+                                    <p>Always exploring new technologies and creative approaches</p>
+                                </div>
+                            </div>
+                            <div class="value-item">
+                                <div class="value-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="value-content">
+                                    <h4>Collaboration</h4>
+                                    <p>Best results come from working together and sharing knowledge</p>
+                                </div>
+                            </div>
+                            <div class="value-item">
+                                <div class="value-icon">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <div class="value-content">
+                                    <h4>Excellence</h4>
+                                    <p>Committed to delivering high-quality, maintainable solutions</p>
+                                </div>
+                            </div>
+                            <div class="value-item">
+                                <div class="value-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="value-content">
+                                    <h4>Growth</h4>
+                                    <p>Continuous learning and adapting to evolving technologies</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Services Section -->
+            <div class="services-section" data-aos="fade-up" data-aos-delay="400">
+                <h3 class="services-title">What I Do Best</h3>
+                <div class="services-grid">
+                    <div class="service-card glass-card" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="service-header">
+                            <div class="service-icon">
+                                <img src="assets/3d-business-guy-with-backpack-and-laptop.png" alt="Laravel Development">
+                            </div>
+                            <div class="service-badge">Backend</div>
                         </div>
                         <div class="service-content">
                             <h4>Laravel Development</h4>
-                            <p>Building robust backend applications with PHP Laravel framework and MySQL</p>
+                            <p>Building robust backend applications with PHP Laravel framework and MySQL database integration</p>
+                            <div class="service-tech">
+                                <span>PHP</span>
+                                <span>Laravel</span>
+                                <span>MySQL</span>
+                            </div>
+                        </div>
+                        <div class="service-footer">
+                            <a href="#projects" class="service-link">
+                                <span>View Projects</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="service-card" data-aos="fade-left" data-aos-delay="200">
-                        <div class="service-icon">
-                            <img src="assets/active-young-man-holding-laptop.png" alt="Frontend Development">
+                    
+                    <div class="service-card glass-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="service-header">
+                            <div class="service-icon">
+                                <img src="assets/active-young-man-holding-laptop.png" alt="Frontend Development">
+                            </div>
+                            <div class="service-badge">Frontend</div>
                         </div>
                         <div class="service-content">
                             <h4>React & Next.js</h4>
-                            <p>Creating modern frontend interfaces with React, Next.js and Tailwind CSS</p>
+                            <p>Creating modern frontend interfaces with React, Next.js and Tailwind CSS for optimal user experience</p>
+                            <div class="service-tech">
+                                <span>React</span>
+                                <span>Next.js</span>
+                                <span>Tailwind</span>
+                            </div>
+                        </div>
+                        <div class="service-footer">
+                            <a href="#projects" class="service-link">
+                                <span>View Projects</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="service-card" data-aos="fade-left" data-aos-delay="300">
-                        <div class="service-icon">
-                            <img src="assets/cute-robot-using-laptop-friendly-ai-chatbot-illustration-colorful-tech-mascot-drawing.png" alt="Real-time Features">
+                    
+                    <div class="service-card glass-card" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="service-header">
+                            <div class="service-icon">
+                                <img src="assets/cute-robot-using-laptop-friendly-ai-chatbot-illustration-colorful-tech-mascot-drawing.png" alt="Real-time Features">
+                            </div>
+                            <div class="service-badge">Full-Stack</div>
                         </div>
                         <div class="service-content">
                             <h4>Real-time Features</h4>
-                            <p>WebSockets, live chat, authentication with Clerk and MongoDB integration</p>
+                            <p>WebSockets, live chat, authentication with Clerk and MongoDB integration for dynamic applications</p>
+                            <div class="service-tech">
+                                <span>WebSocket</span>
+                                <span>MongoDB</span>
+                                <span>Auth</span>
+                            </div>
+                        </div>
+                        <div class="service-footer">
+                            <a href="#projects" class="service-link">
+                                <span>View Projects</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -371,100 +695,386 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Enhanced Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Featured Projects</h2>
+            <!-- Section Header -->
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge">
+                    <span>Portfolio</span>
+                </div>
+                <h2 class="section-title">
+                    Featured <span class="highlight">Projects</span>
+                </h2>
                 <div class="section-line"></div>
+                <p class="section-subtitle">
+                    A showcase of my best work, from concept to completion
+                </p>
             </div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://img.icons8.com/color/96/shopping-cart-loaded.png" alt="E-commerce Platform">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>E-commerce Platform</h3>
-                        <p>A full-featured e-commerce platform built with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">Stripe</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://img.icons8.com/color/96/task-planning.png" alt="Task Management App">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Task Management App</h3>
-                        <p>A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Vue.js</span>
-                            <span class="tech-tag">Express</span>
-                            <span class="tech-tag">Socket.io</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                        </div>
-                    </div>
-                </div>
+            <!-- Project Filters -->
+            <div class="project-filters" data-aos="fade-up" data-aos-delay="100">
+                <button class="filter-btn active" data-filter="all">
+                    <span>All Projects</span>
+                    <div class="filter-indicator"></div>
+                </button>
+                <button class="filter-btn" data-filter="fullstack">
+                    <span>Full-Stack</span>
+                    <div class="filter-indicator"></div>
+                </button>
+                <button class="filter-btn" data-filter="frontend">
+                    <span>Frontend</span>
+                    <div class="filter-indicator"></div>
+                </button>
+                <button class="filter-btn" data-filter="backend">
+                    <span>Backend</span>
+                    <div class="filter-indicator"></div>
+                </button>
+            </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://img.icons8.com/color/96/chatbot.png" alt="AI Chatbot">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                            </div>
+            <!-- Enhanced Projects Grid -->
+            <div class="projects-showcase">
+                <!-- Featured Project 1 - E-commerce Platform -->
+                <article class="project-card featured-card glass-card" data-category="fullstack" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="project-header">
+                        <div class="project-status">
+                            <span class="status-badge featured">Featured</span>
+                            <span class="category-badge fullstack">Full-Stack</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="action-btn favorite" title="Add to favorites">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <button class="action-btn share" title="Share project">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <h3>AI-Powered Chatbot</h3>
-                        <p>An intelligent chatbot using natural language processing to provide customer support and automated responses for businesses.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Django</span>
-                            <span class="tech-tag">TensorFlow</span>
-                            <span class="tech-tag">React</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://img.icons8.com/color/96/workout.png" alt="Fitness Tracker">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                    <div class="project-media">
+                        <div class="project-image-container">
+                            <img src="https://img.icons8.com/color/96/shopping-cart-loaded.png" alt="ModernShop E-commerce Platform" class="project-icon">
+                            <div class="project-overlay">
+                                <div class="overlay-content">
+                                    <div class="project-links">
+                                        <a href="#" class="project-btn primary" title="View Live Demo">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>Live Demo</span>
+                                        </a>
+                                        <a href="#" class="project-btn secondary" title="View Source Code">
+                                            <i class="fab fa-github"></i>
+                                            <span>Source</span>
+                                        </a>
+                                        <button class="project-btn tertiary" onclick="openProjectModal('ecommerce')" title="View Details">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>Details</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="project-content">
-                        <h3>Fitness Tracker</h3>
-                        <p>A comprehensive fitness tracking application with workout planning, progress monitoring, and social features for fitness enthusiasts.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React Native</span>
-                            <span class="tech-tag">Firebase</span>
-                            <span class="tech-tag">Chart.js</span>
-                            <span class="tech-tag">Redux</span>
+                        <div class="project-meta">
+                            <div class="project-title-section">
+                                <h3 class="project-title">ModernShop E-commerce Platform</h3>
+                                <span class="project-role">Lead Full-Stack Developer</span>
+                            </div>
+                            <div class="project-metrics">
+                                <div class="metric">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>150% Sales ↗</span>
+                                </div>
+                                <div class="metric">
+                                    <i class="fas fa-clock"></i>
+                                    <span>1.2s Load</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="project-description">
+                            A comprehensive e-commerce solution that revolutionized online retail for our client, 
+                            featuring real-time inventory, secure payments, and analytics dashboard.
+                        </p>
+
+                        <!-- Project Highlights -->
+                        <div class="project-highlights">
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="highlight-content">
+                                    <h4>Challenge</h4>
+                                    <p>Handle 10,000+ concurrent users during flash sales</p>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <div class="highlight-content">
+                                    <h4>Solution</h4>
+                                    <p>Microservices with Redis caching & real-time updates</p>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="highlight-content">
+                                    <h4>Impact</h4>
+                                    <p>150% sales increase, 99.9% uptime achieved</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tech Stack -->
+                        <div class="tech-stack">
+                            <div class="tech-stack-header">
+                                <i class="fas fa-code"></i>
+                                <span>Tech Stack</span>
+                            </div>
+                            <div class="tech-tags">
+                                <span class="tech-tag primary">React</span>
+                                <span class="tech-tag secondary">Node.js</span>
+                                <span class="tech-tag accent">MongoDB</span>
+                                <span class="tech-tag success">Redis</span>
+                                <span class="tech-tag warning">Stripe</span>
+                            </div>
                         </div>
                     </div>
+                </article>
+
+                <!-- Project 2 - TaskFlow -->
+                <article class="project-card glass-card" data-category="fullstack" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="project-header">
+                        <div class="project-status">
+                            <span class="category-badge fullstack">Full-Stack</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="action-btn favorite" title="Add to favorites">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <button class="action-btn share" title="Share project">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="project-media">
+                        <div class="project-image-container">
+                            <img src="https://img.icons8.com/color/96/task-planning.png" alt="TaskFlow Collaboration App" class="project-icon">
+                            <div class="project-overlay">
+                                <div class="overlay-content">
+                                    <div class="project-links">
+                                        <a href="#" class="project-btn primary">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>Live Demo</span>
+                                        </a>
+                                        <a href="#" class="project-btn secondary">
+                                            <i class="fab fa-github"></i>
+                                            <span>Source</span>
+                                        </a>
+                                        <button class="project-btn tertiary" onclick="openProjectModal('taskflow')">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>Details</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <div class="project-title-section">
+                                <h3 class="project-title">TaskFlow Collaboration</h3>
+                                <span class="project-role">Lead Frontend Developer</span>
+                            </div>
+                            <div class="project-metrics">
+                                <div class="metric">
+                                    <i class="fas fa-users"></i>
+                                    <span>500+ Teams</span>
+                                </div>
+                                <div class="metric">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.8 Rating</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="project-description">
+                            Real-time collaboration platform that improved productivity by 40% for remote teams 
+                            with intuitive task management and seamless communication.
+                        </p>
+
+                        <div class="tech-stack">
+                            <div class="tech-stack-header">
+                                <i class="fas fa-code"></i>
+                                <span>Tech Stack</span>
+                            </div>
+                            <div class="tech-tags">
+                                <span class="tech-tag primary">Vue.js</span>
+                                <span class="tech-tag secondary">Express</span>
+                                <span class="tech-tag accent">Socket.io</span>
+                                <span class="tech-tag success">PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 - AI Chatbot -->
+                <article class="project-card glass-card" data-category="backend" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="project-header">
+                        <div class="project-status">
+                            <span class="category-badge backend">Backend</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="action-btn favorite" title="Add to favorites">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <button class="action-btn share" title="Share project">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="project-media">
+                        <div class="project-image-container">
+                            <img src="https://img.icons8.com/color/96/chatbot.png" alt="AI Chatbot" class="project-icon">
+                            <div class="project-overlay">
+                                <div class="overlay-content">
+                                    <div class="project-links">
+                                        <a href="#" class="project-btn primary">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>Live Demo</span>
+                                        </a>
+                                        <a href="#" class="project-btn secondary">
+                                            <i class="fab fa-github"></i>
+                                            <span>Source</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <div class="project-title-section">
+                                <h3 class="project-title">AI-Powered Chatbot</h3>
+                                <span class="project-role">Backend Developer</span>
+                            </div>
+                            <div class="project-metrics">
+                                <div class="metric">
+                                    <i class="fas fa-robot"></i>
+                                    <span>95% Accuracy</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="project-description">
+                            Intelligent chatbot using natural language processing for customer support 
+                            and automated responses across multiple business domains.
+                        </p>
+
+                        <div class="tech-stack">
+                            <div class="tech-stack-header">
+                                <i class="fas fa-code"></i>
+                                <span>Tech Stack</span>
+                            </div>
+                            <div class="tech-tags">
+                                <span class="tech-tag primary">Python</span>
+                                <span class="tech-tag secondary">Django</span>
+                                <span class="tech-tag accent">TensorFlow</span>
+                                <span class="tech-tag success">React</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4 - Fitness Tracker -->
+                <article class="project-card glass-card" data-category="frontend" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="project-header">
+                        <div class="project-status">
+                            <span class="category-badge frontend">Frontend</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="action-btn favorite" title="Add to favorites">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <button class="action-btn share" title="Share project">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="project-media">
+                        <div class="project-image-container">
+                            <img src="https://img.icons8.com/color/96/workout.png" alt="Fitness Tracker" class="project-icon">
+                            <div class="project-overlay">
+                                <div class="overlay-content">
+                                    <div class="project-links">
+                                        <a href="#" class="project-btn primary">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>Live Demo</span>
+                                        </a>
+                                        <a href="#" class="project-btn secondary">
+                                            <i class="fab fa-github"></i>
+                                            <span>Source</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <div class="project-title-section">
+                                <h3 class="project-title">Fitness Tracker</h3>
+                                <span class="project-role">Frontend Developer</span>
+                            </div>
+                            <div class="project-metrics">
+                                <div class="metric">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>Mobile App</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="project-description">
+                            Comprehensive fitness tracking application with workout planning, 
+                            progress monitoring, and social features for fitness enthusiasts.
+                        </p>
+
+                        <div class="tech-stack">
+                            <div class="tech-stack-header">
+                                <i class="fas fa-code"></i>
+                                <span>Tech Stack</span>
+                            </div>
+                            <div class="tech-tags">
+                                <span class="tech-tag primary">React Native</span>
+                                <span class="tech-tag secondary">Firebase</span>
+                                <span class="tech-tag accent">Chart.js</span>
+                                <span class="tech-tag success">Redux</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- View More Section -->
+            <div class="projects-footer" data-aos="fade-up" data-aos-delay="600">
+                <div class="footer-content">
+                    <h3>Want to see more?</h3>
+                    <p>Check out my GitHub for additional projects and contributions</p>
+                    <a href="https://github.com/princedwivedi2" class="view-more-btn glass-btn" target="_blank">
+                        <i class="fab fa-github"></i>
+                        <span>View All Projects</span>
+                        <div class="btn-glow"></div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -474,33 +1084,55 @@
     <section id="contact" class="contact">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Get In Touch</h2>
+                <h2 class="section-title">Let's Work Together</h2>
                 <div class="section-line"></div>
-                <p class="section-subtitle">Let's work together to bring your ideas to life</p>
+                <p class="section-subtitle">Ready to bring your ideas to life? Let's create something amazing together.</p>
+            </div>
+            
+            <!-- Strategic CTAs -->
+            <div class="contact-ctas">
+                <div class="cta-row">
+                    <a href="mailto:officialprince921@gmail.com" class="cta-card email-cta">
+                        <div class="cta-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="cta-content">
+                            <h3>Send me an email</h3>
+                            <p>Get a response within 24 hours</p>
+                            <span class="cta-action">officialprince921@gmail.com</span>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="cta-card download-cta" title="Download my professional CV">
+                        <div class="cta-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="cta-content">
+                            <h3>Download my CV</h3>
+                            <p>View my complete experience</p>
+                            <span class="cta-action">Prince_Dwivedi_CV.pdf</span>
+                        </div>
+                    </a>
+                    
+                    <a href="tel:+918954539547" class="cta-card call-cta">
+                        <div class="cta-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="cta-content">
+                            <h3>Schedule a call</h3>
+                            <p>Let's discuss your project</p>
+                            <span class="cta-action">+91 89545 39547</span>
+                        </div>
+                    </a>
+                </div>
             </div>
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-item">
                         <img src="https://img.icons8.com/color/48/email.png" alt="Email">
-                        <div>
-                            <h4>Email</h4>
-                            <p>officialprince921@gmail.com</p>
-                        </div>
+                      
                     </div>
-                    <div class="contact-item">
-                        <img src="https://img.icons8.com/color/48/phone.png" alt="Phone">
-                        <div>
-                            <h4>Phone</h4>
-                            <p>+91 89545 39547</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <img src="https://img.icons8.com/color/48/address.png" alt="Location">
-                        <div>
-                            <h4>Location</h4>
-                            <p>Lucknow, Uttar Pradesh</p>
-                        </div>
-                    </div>
+                  
                     <div class="social-links">
                         <a href="https://github.com/princedwivedi2" class="social-link" title="GitHub">
                             <img src="https://img.icons8.com/color/32/github.png" alt="GitHub">
@@ -546,6 +1178,8 @@
         </div>
     </section>
 
+    </main>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -566,6 +1200,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="APP.JS"></script>
+    <!-- Removed invalid APP.JS reference to avoid 404 and script loading errors -->
+    <script src="script.js"></script>
 </body>
 </html>
