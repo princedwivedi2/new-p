@@ -3,6 +3,11 @@
    All UI functionalities working properly
 ======================================== */
 
+// Register GSAP plugins
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
+
 // Global variables
 let isTyping = false;
 let currentRole = 0;
@@ -35,6 +40,7 @@ function initializeAllFunctionalities() {
     initParticles();
     initProjectFilters();
     fixFirebaseDjangoLayout();
+    initRevolutionary3DCarousel(); // 🚀 NEW: Revolutionary 3D Carousel
     
     console.log('All functionalities initialized successfully!');
     
@@ -1292,3 +1298,794 @@ function initContactForm() {
     
     console.log('✅ Contact form initialized');
 }
+
+/* ========================================
+   🚀 REVOLUTIONARY 3D MORPHING CAROUSEL 🚀
+   Extraordinary project showcase with GSAP animations
+======================================== */
+
+function initRevolutionary3DCarousel() {
+    try {
+        console.log('🎠 Initializing Revolutionary 3D Carousel...');
+        
+        // Check if we're on a page with the regular projects section
+        const projectsSection = document.getElementById('projects');
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        // Try to find 3D carousel elements first
+        const carousel = document.getElementById('featuredCarousel');
+        const morphingCards = document.querySelectorAll('.morphing-project-card');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicators = document.querySelectorAll('.indicator-dot');
+        
+        // If 3D carousel elements exist, initialize the full 3D carousel
+        if (carousel && morphingCards.length > 0) {
+            console.log('🎯 Found 3D carousel elements, initializing full carousel...');
+            initFull3DCarousel(carousel, morphingCards, prevBtn, nextBtn, indicators);
+            return;
+        }
+        
+        // If regular project cards exist, enhance them with 3D effects
+        if (projectsSection && projectCards.length > 0) {
+            console.log('🎨 Found regular project cards, enhancing with 3D effects...');
+            enhanceProjectCardsWith3D(projectCards);
+            return;
+        }
+        
+        // Create a fallback interactive experience if no elements found
+        console.log('🌟 No project elements found, creating fallback experience...');
+        createFallbackInteractiveExperience();
+        
+    } catch (error) {
+        console.warn('⚠️ 3D Carousel initialization error (non-critical):', error.message);
+        // Gracefully handle the error without breaking other functionality
+        createFallbackInteractiveExperience();
+    }
+}
+
+function initFull3DCarousel(carousel, cards, prevBtn, nextBtn, indicators) {
+    let currentIndex = 0;
+    let isTransitioning = false;
+    const totalCards = cards.length;
+    
+    // Initialize GSAP timeline for smooth animations
+    const tl = gsap.timeline();
+    
+    // Set initial positions
+    function setInitialPositions() {
+        cards.forEach((card, index) => {
+            card.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next');
+            
+            if (index === currentIndex) {
+                card.classList.add('active');
+            } else if (index === (currentIndex - 1 + totalCards) % totalCards) {
+                card.classList.add('prev');
+            } else if (index === (currentIndex + 1) % totalCards) {
+                card.classList.add('next');
+            } else if (index === (currentIndex - 2 + totalCards) % totalCards) {
+                card.classList.add('far-prev');
+            } else if (index === (currentIndex + 2) % totalCards) {
+                card.classList.add('far-next');
+            } else {
+                // Hide other cards
+                gsap.set(card, { opacity: 0, scale: 0.3 });
+            }
+        });
+        
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentIndex);
+        });
+    }
+    
+    // Animate card transitions with GSAP
+    function animateTransition() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        
+        const timeline = gsap.timeline({
+            onComplete: () => {
+                isTransitioning = false;
+            }
+        });
+        
+        // Animate all cards to their new positions
+        cards.forEach((card, index) => {
+            const currentClass = getCurrentClass(index);
+            const newTransform = getTransformForClass(currentClass);
+            const newOpacity = getOpacityForClass(currentClass);
+            const newScale = getScaleForClass(currentClass);
+            
+            timeline.to(card, {
+                transform: newTransform,
+                opacity: newOpacity,
+                scale: newScale,
+                duration: 0.8,
+                ease: "power3.inOut"
+            }, 0);
+            
+            // Update classes
+            card.className = 'morphing-project-card ' + currentClass;
+        });
+        
+        // Animate indicators
+        timeline.to(indicators, {
+            scale: 1,
+            duration: 0.3,
+            stagger: 0.1
+        }, 0);
+    }
+    
+    // Get the class for a card based on its position relative to current
+    function getCurrentClass(index) {
+        if (index === currentIndex) return 'active';
+        if (index === (currentIndex - 1 + totalCards) % totalCards) return 'prev';
+        if (index === (currentIndex + 1) % totalCards) return 'next';
+        if (index === (currentIndex - 2 + totalCards) % totalCards) return 'far-prev';
+        if (index === (currentIndex + 2) % totalCards) return 'far-next';
+        return 'hidden';
+    }
+    
+    // Get transform values for each class
+    function getTransformForClass(className) {
+        const transforms = {
+            'active': 'translate(-50%, -50%) rotateY(0deg) scale(1.05)',
+            'prev': 'translate(-150%, -50%) rotateY(45deg) scale(0.85)',
+            'next': 'translate(50%, -50%) rotateY(-45deg) scale(0.85)',
+            'far-prev': 'translate(-300%, -50%) rotateY(60deg) scale(0.6)',
+            'far-next': 'translate(200%, -50%) rotateY(-60deg) scale(0.6)',
+            'hidden': 'translate(-50%, -50%) scale(0.3)'
+        };
+        return transforms[className] || transforms['hidden'];
+    }
+    
+    function getOpacityForClass(className) {
+        const opacities = {
+            'active': 1,
+            'prev': 0.7,
+            'next': 0.7,
+            'far-prev': 0.3,
+            'far-next': 0.3,
+            'hidden': 0
+        };
+        return opacities[className] || 0;
+    }
+    
+    function getScaleForClass(className) {
+        const scales = {
+            'active': 1.05,
+            'prev': 0.85,
+            'next': 0.85,
+            'far-prev': 0.6,
+            'far-next': 0.6,
+            'hidden': 0.3
+        };
+        return scales[className] || 0.3;
+    }
+    
+    // Navigation functions
+    function goToNext() {
+        currentIndex = (currentIndex + 1) % totalCards;
+        setInitialPositions();
+        animateTransition();
+        console.log('🎠 Carousel moved to index:', currentIndex);
+    }
+    
+    function goToPrev() {
+        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+        setInitialPositions();
+        animateTransition();
+        console.log('🎠 Carousel moved to index:', currentIndex);
+    }
+    
+    function goToSlide(index) {
+        if (index === currentIndex || isTransitioning) return;
+        currentIndex = index;
+        setInitialPositions();
+        animateTransition();
+        console.log('🎠 Carousel jumped to index:', currentIndex);
+    }
+    
+    // Event listeners
+    if (nextBtn) {
+        nextBtn.addEventListener('click', goToNext);
+    }
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', goToPrev);
+    }
+    
+    // Indicator navigation
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => goToSlide(index));
+    });
+    
+    // Auto-rotate carousel (optional)
+    let autoRotateInterval;
+    
+    function startAutoRotate() {
+        autoRotateInterval = setInterval(goToNext, 5000); // 5 seconds
+    }
+    
+    function stopAutoRotate() {
+        if (autoRotateInterval) {
+            clearInterval(autoRotateInterval);
+        }
+    }
+    
+    // Pause auto-rotation on hover
+    carousel.addEventListener('mouseenter', stopAutoRotate);
+    carousel.addEventListener('mouseleave', startAutoRotate);
+    
+    // Touch/swipe support for mobile
+    let startX = 0;
+    let startY = 0;
+    
+    carousel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        stopAutoRotate();
+    });
+    
+    carousel.addEventListener('touchend', (e) => {
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+        
+        // Only trigger if horizontal swipe is dominant
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+            if (deltaX > 0) {
+                goToPrev(); // Swipe right = previous
+            } else {
+                goToNext(); // Swipe left = next
+            }
+        }
+        
+        startAutoRotate();
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            goToPrev();
+        } else if (e.key === 'ArrowRight') {
+            goToNext();
+        } else if (e.key >= '1' && e.key <= '5') {
+            const index = parseInt(e.key) - 1;
+            if (index < totalCards) {
+                goToSlide(index);
+            }
+        }
+    });
+    
+    // Initialize carousel
+    setInitialPositions();
+    
+    // Add holographic effects
+    cards.forEach((card) => {
+        const holographicImage = card.querySelector('.holographic-image');
+        if (holographicImage) {
+            // Add mouse move effect for holographic illusion
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                gsap.to(holographicImage, {
+                    transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(holographicImage, {
+                    transform: 'rotateX(0deg) rotateY(0deg)',
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            });
+        }
+    });
+    
+    // Start auto-rotation
+    startAutoRotate();
+    
+    console.log('✨ Revolutionary 3D Carousel initialized with', totalCards, 'projects');
+}
+
+// Enhanced 3D effects for regular project cards
+function enhanceProjectCardsWith3D(projectCards) {
+    console.log('🎨 Enhancing', projectCards.length, 'project cards with 3D effects');
+    
+    projectCards.forEach((card, index) => {
+        // Add 3D transform styles
+        card.style.transformStyle = 'preserve-3d';
+        card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+        
+        // Enhanced hover effects with 3D transforms
+        card.addEventListener('mouseenter', (e) => {
+            gsap.to(card, {
+                scale: 1.05,
+                rotateX: 5,
+                rotateY: 5,
+                z: 50,
+                boxShadow: '0 20px 40px rgba(99, 102, 241, 0.3)',
+                duration: 0.6,
+                ease: "power3.out"
+            });
+            
+            // Add floating animation
+            gsap.to(card, {
+                y: -10,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+        
+        card.addEventListener('mouseleave', (e) => {
+            gsap.to(card, {
+                scale: 1,
+                rotateX: 0,
+                rotateY: 0,
+                z: 0,
+                y: 0,
+                boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)',
+                duration: 0.6,
+                ease: "power3.out"
+            });
+        });
+        
+        // 3D mouse tracking effect
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            gsap.to(card, {
+                rotateX: rotateX,
+                rotateY: rotateY,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+        
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // Staggered reveal animation
+                    gsap.fromTo(entry.target, 
+                        {
+                            opacity: 0,
+                            y: 50,
+                            rotateX: 30,
+                            scale: 0.8
+                        }, 
+                        {
+                            opacity: 1,
+                            y: 0,
+                            rotateX: 0,
+                            scale: 1,
+                            duration: 0.8,
+                            delay: index * 0.1,
+                            ease: "power3.out"
+                        }
+                    );
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        observer.observe(card);
+        
+        // Add tilt effect on project images
+        const projectImage = card.querySelector('.project-image-container, .project-icon');
+        if (projectImage) {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width;
+                const y = (e.clientY - rect.top) / rect.height;
+                
+                gsap.to(projectImage, {
+                    rotateX: (y - 0.5) * 20,
+                    rotateY: (0.5 - x) * 20,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(projectImage, {
+                    rotateX: 0,
+                    rotateY: 0,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            });
+        }
+    });
+    
+    // Add scroll-triggered stagger animation for all cards
+    gsap.fromTo(projectCards,
+        {
+            opacity: 0,
+            y: 100,
+            scale: 0.8,
+            rotateX: 30
+        },
+        {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotateX: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: projectCards[0]?.parentElement || '.projects',
+                start: 'top 80%',
+                once: true
+            }
+        }
+    );
+    
+    console.log('✨ Enhanced', projectCards.length, 'project cards with 3D effects');
+}
+
+// Fallback Interactive Experience
+function createFallbackInteractiveExperience() {
+    console.log('🌟 Creating fallback interactive experience...');
+    
+    try {
+        // Create floating geometric shapes for visual interest
+        createFloatingShapes();
+        
+        // Add interactive cursor effects
+        enhanceCursorInteractivity();
+        
+        // Create visual feedback for any clickable elements
+        addUniversalClickEffects();
+        
+        console.log('✨ Fallback interactive experience created successfully');
+    } catch (error) {
+        console.warn('⚠️ Fallback experience creation failed:', error.message);
+    }
+}
+
+// Create floating geometric shapes
+function createFloatingShapes() {
+    const shapes = ['circle', 'triangle', 'square', 'hexagon'];
+    const colors = ['#2563eb', '#7c3aed', '#06b6d4', '#10b981'];
+    
+    for (let i = 0; i < 8; i++) {
+        const shape = document.createElement('div');
+        shape.className = 'floating-shape';
+        shape.style.cssText = `
+            position: fixed;
+            width: ${20 + Math.random() * 40}px;
+            height: ${20 + Math.random() * 40}px;
+            background: ${colors[Math.floor(Math.random() * colors.length)]};
+            border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: -1;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+        `;
+        
+        document.body.appendChild(shape);
+        
+        // Animate shape
+        gsap.to(shape, {
+            x: (Math.random() - 0.5) * 200,
+            y: (Math.random() - 0.5) * 200,
+            rotation: Math.random() * 360,
+            scale: Math.random() * 2 + 0.5,
+            duration: Math.random() * 10 + 10,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+    }
+}
+
+// Enhanced cursor interactivity
+function enhanceCursorInteractivity() {
+    // Create custom cursor if it doesn't exist
+    if (!document.querySelector('.custom-cursor')) {
+        const cursor = document.createElement('div');
+        cursor.className = 'custom-cursor';
+        cursor.style.cssText = `
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: rgba(37, 99, 235, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: difference;
+            transition: all 0.3s ease;
+        `;
+        document.body.appendChild(cursor);
+        
+        // Track mouse movement
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, {
+                x: e.clientX - 10,
+                y: e.clientY - 10,
+                duration: 0.1
+            });
+        });
+        
+        // Enhance cursor on interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, [role="button"], .clickable');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                gsap.to(cursor, {
+                    scale: 2,
+                    background: 'rgba(124, 58, 237, 0.8)',
+                    duration: 0.3
+                });
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                gsap.to(cursor, {
+                    scale: 1,
+                    background: 'rgba(37, 99, 235, 0.8)',
+                    duration: 0.3
+                });
+            });
+        });
+    }
+}
+
+// Universal click effects
+function addUniversalClickEffects() {
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.no-ripple')) return;
+        
+        createRippleEffect(e.clientX, e.clientY);
+    });
+}
+
+// Enhanced ripple effect
+function createRippleEffect(x, y, options = {}) {
+    const ripple = document.createElement('div');
+    const size = options.size || 100;
+    const color = options.color || 'rgba(37, 99, 235, 0.6)';
+    
+    ripple.style.cssText = `
+        position: fixed;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x - size/2}px;
+        top: ${y - size/2}px;
+        background: radial-gradient(circle, ${color} 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: scale(0);
+    `;
+    
+    document.body.appendChild(ripple);
+    
+    // Animate ripple
+    gsap.timeline()
+        .to(ripple, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out"
+        })
+        .to(ripple, {
+            opacity: 0,
+            duration: 0.4,
+            ease: "power2.in",
+            onComplete: () => {
+                if (ripple.parentNode) {
+                    ripple.parentNode.removeChild(ripple);
+                }
+            }
+        });
+}
+
+/* ========================================
+   ENHANCED ERROR HANDLING & PERFORMANCE
+======================================== */
+
+// Global error handler with user-friendly messages
+window.addEventListener('error', (e) => {
+    console.error('🚨 JavaScript Error:', {
+        message: e.message,
+        filename: e.filename,
+        line: e.lineno,
+        column: e.colno,
+        error: e.error
+    });
+    
+    // Don't show error messages for common non-critical errors
+    const ignorableErrors = [
+        'Script error',
+        'ResizeObserver loop limit exceeded',
+        'Non-Error promise rejection captured'
+    ];
+    
+    if (!ignorableErrors.some(ignorable => e.message.includes(ignorable))) {
+        // Show user-friendly message for critical errors
+        showErrorNotification('Something went wrong, but don\'t worry - everything is still working!');
+    }
+});
+
+// Enhanced notification system
+function showErrorNotification(message) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+        z-index: 10000;
+        max-width: 300px;
+        opacity: 0;
+        transform: translateX(100%);
+    `;
+    notification.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>${message}</span>
+            <button style="background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem; margin-left: auto;" onclick="this.parentElement.parentElement.remove()">×</button>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    gsap.to(notification, {
+        opacity: 1,
+        x: 0,
+        duration: 0.5,
+        ease: "back.out(1.7)"
+    });
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            gsap.to(notification, {
+                opacity: 0,
+                x: 100,
+                duration: 0.3,
+                onComplete: () => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }
+            });
+        }
+    }, 5000);
+}
+
+/* ========================================
+   PERFORMANCE OPTIMIZATION
+======================================== */
+
+// Optimize animations for better performance
+function optimizeAnimations() {
+    // Enable hardware acceleration for better performance
+    const animatedElements = document.querySelectorAll('.project-card, .mode-card, .floating-shape');
+    animatedElements.forEach(el => {
+        el.style.willChange = 'transform, opacity';
+        el.style.transform = 'translateZ(0)'; // Force hardware acceleration
+    });
+    
+    // Throttle resize events
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            // Recalculate positions and sizes after resize
+            console.log('🔄 Window resized, recalculating layouts...');
+        }, 250);
+    });
+}
+
+// Initialize performance optimizations
+document.addEventListener('DOMContentLoaded', () => {
+    requestIdleCallback(() => {
+        optimizeAnimations();
+    });
+});
+
+/* ========================================
+   ACCESSIBILITY ENHANCEMENTS
+======================================== */
+
+// Enhanced keyboard navigation
+function enhanceKeyboardNavigation() {
+    // Add skip links for better accessibility
+    const skipLink = document.createElement('a');
+    skipLink.href = '#main-content';
+    skipLink.className = 'skip-link';
+    skipLink.textContent = 'Skip to main content';
+    skipLink.style.cssText = `
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: var(--primary-color);
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+        z-index: 10001;
+        border-radius: 4px;
+        transition: top 0.3s ease;
+    `;
+    
+    skipLink.addEventListener('focus', () => {
+        skipLink.style.top = '6px';
+    });
+    
+    skipLink.addEventListener('blur', () => {
+        skipLink.style.top = '-40px';
+    });
+    
+    document.body.insertBefore(skipLink, document.body.firstChild);
+    
+    // Enhanced focus management
+    document.addEventListener('keydown', (e) => {
+        // Escape key functionality
+        if (e.key === 'Escape') {
+            // Close any open modals
+            const activeModal = document.querySelector('.modal.active, .project-modal[style*="flex"]');
+            if (activeModal) {
+                if (typeof closeProjectModal === 'function') {
+                    closeProjectModal();
+                }
+            }
+            
+            // Close any dropdowns
+            const activeDropdowns = document.querySelectorAll('.dropdown.active');
+            activeDropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+}
+
+// Initialize accessibility enhancements
+document.addEventListener('DOMContentLoaded', () => {
+    enhanceKeyboardNavigation();
+});
+
+// Export functions for testing (if needed)
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        initRevolutionary3DCarousel,
+        enhanceProjectCardsWith3D,
+        createFallbackInteractiveExperience,
+        showErrorNotification,
+        createRippleEffect,
+        optimizeAnimations,
+        enhanceKeyboardNavigation
+    };
+}
+
+console.log('🎉 Enhanced Script.js loaded successfully! All functionalities optimized and error-handled.');

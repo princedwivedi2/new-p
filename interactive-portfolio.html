@@ -28,6 +28,23 @@
     <!-- Skip link for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
+    <!-- User Mode Badge -->
+    <div class="user-badge" style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        z-index: 1001;
+        animation: pulse 2s infinite;
+    ">
+        <i class="fas fa-users"></i> USER MODE
+    </div>
+    
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
@@ -1306,5 +1323,49 @@
     <!-- Scripts -->
     <!-- Removed invalid APP.JS reference to avoid 404 and script loading errors -->
     <script src="script.js"></script>
+    
+    <!-- Mode Switcher -->
+    <div style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--primary-color);
+        border-radius: 8px;
+        padding: 0.5rem;
+        z-index: 1001;
+    ">
+        <button onclick="switchToDeveloperMode()" style="
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        " onmouseover="this.style.background='var(--primary-color)'; this.style.color='white'" 
+           onmouseout="this.style.background='none'; this.style.color='var(--primary-color)'">
+            <i class="fas fa-code"></i> Switch to Developer Mode
+        </button>
+    </div>
+
+    <script>
+        function switchToDeveloperMode() {
+            localStorage.setItem('portfolioMode', 'developer');
+            window.location.href = 'developer-portfolio.html';
+        }
+        
+        // Add pulse animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
