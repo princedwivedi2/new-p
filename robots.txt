@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Disallow access to admin pages
+Disallow: /admin/
+Disallow: /private/
+
+# Block specific files
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.txt$
+Disallow: /*.md$
+
+# Allow search engines to index all content
+Allow: /index.html
+Allow: /developer-portfolio-v2.html
+Allow: /interactive-portfolio.html
+Allow: /assets/
+
+# Sitemap location
+Sitemap: https://princedwivedi.com/sitemap.xml

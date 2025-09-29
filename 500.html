@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="500 - Server Error | Prince Dwivedi Portfolio">
+    <meta name="theme-color" content="#0a0a1a">
+    
+    <title>500 - Server Error | Prince Dwivedi</title>
+    
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2300f7ff' d='M12,3c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S17,3,12,3z M16.5,16.5l-9-4.5l9-4.5V16.5z'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2300f7ff' d='M12,3c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S17,3,12,3z M16.5,16.5l-9-4.5l9-4.5V16.5z'/%3E%3C/svg%3E">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0a1a;
+            --primary-color: #00f7ff;
+            --text-primary: #ffffff;
+            --text-secondary: #b4b4d6;
+            --error-color: #ff3a5e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .error-container {
+            max-width: 600px;
+            padding: 3rem 2rem;
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(135deg, #ff3a5e, #ff8f3a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #00f7ff, #0099ff);
+            color: var(--bg-dark);
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 247, 255, 0.4);
+        }
+        
+        .error-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--error-color);
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
+        }
+        
+        .terminal-text {
+            background: rgba(0, 0, 0, 0.3);
+            font-family: 'Courier New', monospace;
+            padding: 1rem;
+            border-radius: 4px;
+            color: #00ff00;
+            text-align: left;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+        
+        .terminal-text p {
+            color: #00ff00;
+            margin: 0;
+        }
+        
+        .terminal-text .error-line {
+            color: var(--error-color);
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">500</div>
+        <h1>Server Error</h1>
+        <p>Sorry, something went wrong on our server. Our team has been notified and is working on a fix.</p>
+        
+        <div class="terminal-text">
+            <p>> ERROR_DETECTED</p>
+            <p class="error-line">! Exception in thread "main" java.lang.ServerError</p>
+            <p>> ATTEMPTING_RECOVERY...</p>
+            <p>> REDIRECTING_TO_HOME <span class="blink">_</span></p>
+        </div>
+        
+        <p>In the meantime, let's get you back to a working page:</p>
+        <a href="/" class="button">Return to Homepage</a>
+    </div>
+    
+    <script>
+        // Report 500 to analytics if available
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'error', {
+                'event_category': '500',
+                'event_label': window.location.pathname,
+                'non_interaction': true
+            });
+        }
+        
+        // Auto-redirect after 10 seconds
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 10000);
+    </script>
+</body>
+</html>

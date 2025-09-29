@@ -3,18 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prince Portfolio | Choose Your Experience</title>
+    <meta name="description" content="Prince Dwivedi - Full Stack Developer Portfolio showcasing web development, AI/ML projects, and professional skills">
+    <meta name="keywords" content="portfolio, developer, web development, frontend, backend, javascript, react, node, prince dwivedi">
+    <meta name="author" content="Prince Dwivedi">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Prince Dwivedi | Developer Portfolio">
+    <meta property="og:description" content="Full Stack Developer specializing in modern web applications and AI integration">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://princedwivedi.com">  <!-- Update with your actual domain -->
+    <meta property="og:image" content="assets/3d-casual-life-smiling-man-with-laptop-waving-hand.png">
     
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prince Dwivedi | Developer Portfolio">
+    <meta name="twitter:description" content="Full Stack Developer specializing in modern web applications and AI integration">
     
-    <!-- GSAP for animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Theme Color for Browser -->
+    <meta name="theme-color" content="#0a0a1a">
     
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2300f7ff' d='M12,3c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S17,3,12,3z M16.5,16.5l-9-4.5l9-4.5V16.5z'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2300f7ff' d='M12,3c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S17,3,12,3z M16.5,16.5l-9-4.5l9-4.5V16.5z'/%3E%3C/svg%3E">
+    
+    <!-- iOS PWA specific -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PD Portfolio">
+    
+    <title>Prince Dwivedi | Choose Your Experience</title>
+    
+    <!-- Preconnect to External Domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Google Fonts with display=swap for better performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    </noscript>
+    
+    <!-- Font Awesome for icons with defer -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
+    
+    <!-- GSAP for animations with defer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    
+    <!-- Critical CSS inline for faster first paint -->
     <style>
+        /* Loading Animation */
+        #initialLoader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loader-content {
+            text-align: center;
+        }
+        
+        .loader-logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .loader-circle {
+            width: 100%;
+            height: 100%;
+            border: 3px solid rgba(0, 247, 255, 0.2);
+            border-top-color: #00f7ff;
+            border-radius: 50%;
+            animation: loader-spin 1s linear infinite;
+        }
+        
+        .loader-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #ffffff;
+            margin-top: 16px;
+            letter-spacing: 1px;
+        }
+        
+        .loader-progress {
+            width: 150px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin: 10px auto 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            position: absolute;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00f7ff, #8000ff);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        @keyframes loader-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         :root {
             /* Primary Colors - Match with your existing theme */
             --primary-color: #2563eb;
@@ -499,6 +609,38 @@
     </style>
 </head>
 <body>
+    <!-- Initial Loading Screen -->
+    <div id="initialLoader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <div class="loader-circle"></div>
+            </div>
+            <div class="loader-text">Loading Experience</div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link" style="position: absolute; top: -40px; left: 0; background: var(--primary-color); color: white; padding: 8px; z-index: 100; transition: top 0.3s; font-size: 14px; text-decoration: none;" tabindex="0">Skip to main content</a>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Prince Dwivedi",
+        "url": "https://princedwivedi.com",
+        "jobTitle": "Full Stack Developer",
+        "description": "Full Stack Developer specializing in modern web applications and AI integration",
+        "sameAs": [
+            "https://github.com/princedwivedi2",
+            "https://www.linkedin.com/in/prince-dwivedi-a42b4b2a1",
+            "https://www.instagram.com/mr.prince_dwivedi?igsh=MTZtM2s4N21meXZteQ=="
+        ]
+    }
+    </script>
     <!-- Particles Background - Will be initialized via script -->
     <div id="tsparticles"></div>
     
@@ -593,6 +735,183 @@
     <!-- tsParticles JS -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
     
+    <!-- Service Worker Registration -->
+    <script>
+        // Performance monitoring
+        const perfEntries = {
+            navigationStart: performance.now()
+        };
+        
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                        
+                        // Handle updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New content is available, show refresh button
+                                    showUpdateNotification();
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+        
+        // Show notification for updates
+        function showUpdateNotification() {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'update-notification';
+            notification.innerHTML = `
+                <p>A new version is available!</p>
+                <button id="refreshApp">Refresh</button>
+            `;
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.left = '50%';
+            notification.style.transform = 'translateX(-50%)';
+            notification.style.background = 'rgba(0, 247, 255, 0.9)';
+            notification.style.color = '#0a0a1a';
+            notification.style.padding = '10px 20px';
+            notification.style.borderRadius = '8px';
+            notification.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+            notification.style.zIndex = '9999';
+            document.body.appendChild(notification);
+            
+            // Add event listener to refresh button
+            document.getElementById('refreshApp').addEventListener('click', () => {
+                if (navigator.serviceWorker.controller) {
+                    navigator.serviceWorker.controller.postMessage({ action: 'skipWaiting' });
+                    window.location.reload();
+                }
+            });
+        }
+        
+        // Offline status handler
+        function handleOfflineStatus() {
+            window.addEventListener('online', updateOnlineStatus);
+            window.addEventListener('offline', updateOnlineStatus);
+            updateOnlineStatus();
+        }
+        
+        function updateOnlineStatus() {
+            const statusDisplay = document.getElementById('onlineStatusDisplay');
+            if (!statusDisplay) {
+                const statusElement = document.createElement('div');
+                statusElement.id = 'onlineStatusDisplay';
+                statusElement.style.position = 'fixed';
+                statusElement.style.top = '10px';
+                statusElement.style.right = '10px';
+                statusElement.style.padding = '5px 10px';
+                statusElement.style.borderRadius = '5px';
+                statusElement.style.fontSize = '12px';
+                statusElement.style.zIndex = '1000';
+                statusElement.setAttribute('aria-live', 'polite');
+                document.body.appendChild(statusElement);
+            }
+            
+            const status = navigator.onLine;
+            const statusElement = document.getElementById('onlineStatusDisplay');
+            
+            if (status) {
+                statusElement.textContent = 'Online';
+                statusElement.style.background = 'rgba(0, 255, 0, 0.2)';
+                statusElement.style.color = '#00ff00';
+                statusElement.style.display = 'block';
+                
+                // Hide after 3 seconds when online
+                setTimeout(() => {
+                    statusElement.style.display = 'none';
+                }, 3000);
+            } else {
+                statusElement.textContent = 'Offline - Limited functionality';
+                statusElement.style.background = 'rgba(255, 0, 0, 0.2)';
+                statusElement.style.color = '#ff5555';
+                statusElement.style.display = 'block';
+            }
+        }
+        
+        // Error handling setup
+        function setupErrorHandling() {
+            window.addEventListener('error', event => {
+                console.error('Global error:', event.error);
+                // Only show user-facing errors for critical issues
+                if (event.error && event.error.isCritical) {
+                    showError('Something went wrong. Please refresh the page.');
+                }
+            });
+        }
+        
+        // Show error message to user
+        function showError(message) {
+            const errorElement = document.createElement('div');
+            errorElement.className = 'error-notification';
+            errorElement.setAttribute('role', 'alert');
+            errorElement.innerHTML = `
+                <p>${message}</p>
+                <button aria-label="Close error message">×</button>
+            `;
+            errorElement.style.position = 'fixed';
+            errorElement.style.top = '20px';
+            errorElement.style.left = '50%';
+            errorElement.style.transform = 'translateX(-50%)';
+            errorElement.style.background = 'rgba(255, 0, 0, 0.8)';
+            errorElement.style.color = 'white';
+            errorElement.style.padding = '10px 20px';
+            errorElement.style.borderRadius = '8px';
+            errorElement.style.zIndex = '9999';
+            document.body.appendChild(errorElement);
+            
+            const closeButton = errorElement.querySelector('button');
+            closeButton.addEventListener('click', () => {
+                errorElement.remove();
+            });
+            
+            setTimeout(() => {
+                errorElement.remove();
+            }, 5000);
+        }
+        
+        // Keyboard navigation for accessibility
+        function setupKeyboardNavigation() {
+            const modeCards = document.querySelectorAll('.mode-card');
+            
+            modeCards.forEach((card, index) => {
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `Select ${card.classList.contains('dev-card') ? 'Developer' : 'Business'} portfolio mode`);
+                
+                card.addEventListener('keydown', event => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        card.click();
+                    }
+                });
+            });
+            
+            // Skip to content functionality
+            const skipLink = document.querySelector('.skip-link');
+            if (skipLink) {
+                skipLink.addEventListener('focus', function() {
+                    this.style.top = '10px';
+                });
+                
+                skipLink.addEventListener('blur', function() {
+                    this.style.top = '-40px';
+                });
+            }
+        }
+    </script>
+    
     <script>
         // Initialize Particles
         document.addEventListener('DOMContentLoaded', function() {
@@ -648,28 +967,139 @@
                     }
                 },
                 retina_detect: true
+            }).catch(error => {
+                console.warn('Error initializing particles:', error);
             });
         });
         
-        // Mode Selection
-        function selectMode(mode) {
-            const overlay = document.getElementById('loadingOverlay');
+        // Initialize all page functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Only run these if functions are defined
+            if (typeof setupErrorHandling === 'function') setupErrorHandling();
+            if (typeof handleOfflineStatus === 'function') handleOfflineStatus();
+            if (typeof setupKeyboardNavigation === 'function') setupKeyboardNavigation();
             
-            // Show loading overlay
-            overlay.style.opacity = '1';
-            overlay.style.visibility = 'visible';
+            // Mark DOMContentLoaded performance
+            if (window.performance) {
+                perfEntries.domContentLoaded = performance.now();
+            }
             
-            // Store preference
-            localStorage.setItem('portfolioMode', mode);
-            
-            // Navigate to appropriate portfolio
-            setTimeout(() => {
-                if (mode === 'developer') {
-                    window.location.href = 'developer-portfolio-v2.html';
-                } else {
-                    window.location.href = 'interactive-portfolio.html';
+            // Check for previously selected mode
+            try {
+                const savedMode = localStorage.getItem('portfolioMode');
+                if (savedMode) {
+                    // Auto-redirect to last selected mode if within last 24 hours
+                    const lastInteraction = sessionStorage.getItem('lastInteraction');
+                    if (lastInteraction) {
+                        const lastTime = new Date(lastInteraction).getTime();
+                        const currentTime = new Date().getTime();
+                        const hoursDiff = (currentTime - lastTime) / (1000 * 60 * 60);  // hours difference
+                        
+                        if (hoursDiff < 24) {  // Less than 24 hours
+                            selectMode(savedMode);
+                            return;
+                        }
+                    }
                 }
-            }, 800);
+            } catch (e) {
+                console.warn('Error checking saved mode:', e);
+            }
+        });
+        
+        // When window is fully loaded
+        window.addEventListener('load', function() {
+            // Complete loading progress
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) progressBar.style.width = '100%';
+            
+            // Hide initial loader
+            setTimeout(() => {
+                const initialLoader = document.getElementById('initialLoader');
+                if (initialLoader) {
+                    initialLoader.style.opacity = '0';
+                    setTimeout(() => {
+                        initialLoader.style.display = 'none';
+                    }, 500);
+                }
+                
+                clearInterval(progressInterval);
+            }, 500);
+            
+            // Mark window load performance
+            if (window.performance) {
+                perfEntries.windowLoaded = performance.now();
+                
+                const navStart = perfEntries.navigationStart || 0;
+                const domLoaded = perfEntries.domContentLoaded || 0;
+                const windowLoaded = perfEntries.windowLoaded || 0;
+                
+                console.log(`Performance metrics:`);
+                console.log(`- DOM Content Loaded: ${(domLoaded - navStart).toFixed(1)}ms`);
+                console.log(`- Window Loaded: ${(windowLoaded - navStart).toFixed(1)}ms`);
+            }
+        });
+        
+        // Enhanced Mode Selection with error handling and tracking
+        function selectMode(mode) {
+            try {
+                const overlay = document.getElementById('loadingOverlay');
+                const screenReader = document.querySelector('#loadingOverlay .sr-only');
+                
+                if (screenReader) {
+                    screenReader.textContent = `Loading ${mode} portfolio experience`;
+                }
+                
+                // Show loading overlay
+                if (overlay) {
+                    overlay.style.opacity = '1';
+                    overlay.style.visibility = 'visible';
+                    overlay.setAttribute('aria-hidden', 'false');
+                }
+                
+                // Store preference in localStorage with error handling
+                try {
+                    localStorage.setItem('portfolioMode', mode);
+                    sessionStorage.setItem('lastInteraction', new Date().toString());
+                } catch (storageError) {
+                    console.warn('Unable to store portfolio preferences:', storageError);
+                    // Continue without storing
+                }
+                
+                // Performance mark before navigation
+                if (window.performance && performance.mark) {
+                    performance.mark('navigationStart:' + mode);
+                }
+                
+                // Prefetch the target page
+                const prefetchLink = document.createElement('link');
+                prefetchLink.rel = 'prefetch';
+                prefetchLink.href = mode === 'developer' ? 'developer-portfolio-v2.html' : 'interactive-portfolio.html';
+                document.head.appendChild(prefetchLink);
+                
+                // Navigate to appropriate portfolio with error handling
+                setTimeout(() => {
+                    try {
+                        if (mode === 'developer') {
+                            window.location.href = 'developer-portfolio-v2.html';
+                        } else {
+                            window.location.href = 'interactive-portfolio.html';
+                        }
+                    } catch (navigationError) {
+                        console.error('Navigation error:', navigationError);
+                        showError('Failed to navigate to the selected portfolio. Please try again.');
+                        
+                        // Hide overlay if navigation fails
+                        if (overlay) {
+                            overlay.style.opacity = '0';
+                            overlay.style.visibility = 'hidden';
+                            overlay.setAttribute('aria-hidden', 'true');
+                        }
+                    }
+                }, 800);
+            } catch (error) {
+                console.error('Error in mode selection:', error);
+                showError('An error occurred. Please refresh and try again.');
+            }
         }
     </script>
 </body>

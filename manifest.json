@@ -1,0 +1,54 @@
+{
+  "name": "Prince Dwivedi Portfolio",
+  "short_name": "PD Portfolio",
+  "description": "Full Stack Developer & AI Innovator Portfolio",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0a0a1a",
+  "theme_color": "#00f7ff",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Developer Portfolio",
+      "short_name": "Developer",
+      "description": "View developer portfolio with technical projects",
+      "url": "/developer-portfolio-v2.html",
+      "icons": [{ "src": "assets/icons/dev-icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Interactive Portfolio",
+      "short_name": "Interactive",
+      "description": "View interactive business portfolio",
+      "url": "/interactive-portfolio.html",
+      "icons": [{ "src": "assets/icons/interactive-icon-96.png", "sizes": "96x96" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/screenshots/portfolio-home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Homepage with portfolio selection"
+    },
+    {
+      "src": "assets/screenshots/portfolio-developer.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Developer portfolio view"
+    }
+  ],
+  "related_applications": []
+}
