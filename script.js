@@ -40,12 +40,15 @@ function initializeAllFunctionalities() {
     initParticles();
     initProjectFilters();
     fixFirebaseDjangoLayout();
-    initRevolutionary3DCarousel(); // 🚀 NEW: Revolutionary 3D Carousel
+    // 🚀 NEW: Revolutionary 3D Carousel
     
     console.log('All functionalities initialized successfully!');
     
     // Initialize contact form
     initContactForm();
+    
+    // Initialize GitHub Repository Fetch
+    fetchGitHubRepositories();
 }
 
 /* ========================================
@@ -1299,472 +1302,8 @@ function initContactForm() {
     console.log('✅ Contact form initialized');
 }
 
-/* ========================================
-   🚀 REVOLUTIONARY 3D MORPHING CAROUSEL 🚀
-   Extraordinary project showcase with GSAP animations
-======================================== */
 
-function initRevolutionary3DCarousel() {
-    try {
-        console.log('🎠 Initializing Revolutionary 3D Carousel...');
-        
-        // Check if we're on a page with the regular projects section
-        const projectsSection = document.getElementById('projects');
-        const projectCards = document.querySelectorAll('.project-card');
-        
-        // Try to find 3D carousel elements first
-        const carousel = document.getElementById('featuredCarousel');
-        const morphingCards = document.querySelectorAll('.morphing-project-card');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const indicators = document.querySelectorAll('.indicator-dot');
-        
-        // If 3D carousel elements exist, initialize the full 3D carousel
-        if (carousel && morphingCards.length > 0) {
-            console.log('🎯 Found 3D carousel elements, initializing full carousel...');
-            initFull3DCarousel(carousel, morphingCards, prevBtn, nextBtn, indicators);
-            return;
-        }
-        
-        // If regular project cards exist, enhance them with 3D effects
-        if (projectsSection && projectCards.length > 0) {
-            console.log('🎨 Found regular project cards, enhancing with 3D effects...');
-            enhanceProjectCardsWith3D(projectCards);
-            return;
-        }
-        
-        // Create a fallback interactive experience if no elements found
-        console.log('🌟 No project elements found, creating fallback experience...');
-        createFallbackInteractiveExperience();
-        
-    } catch (error) {
-        console.warn('⚠️ 3D Carousel initialization error (non-critical):', error.message);
-        // Gracefully handle the error without breaking other functionality
-        createFallbackInteractiveExperience();
-    }
-}
 
-function initFull3DCarousel(carousel, cards, prevBtn, nextBtn, indicators) {
-    let currentIndex = 0;
-    let isTransitioning = false;
-    const totalCards = cards.length;
-    
-    // Initialize GSAP timeline for smooth animations
-    const tl = gsap.timeline();
-    
-    // Set initial positions
-    function setInitialPositions() {
-        cards.forEach((card, index) => {
-            card.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next');
-            
-            if (index === currentIndex) {
-                card.classList.add('active');
-            } else if (index === (currentIndex - 1 + totalCards) % totalCards) {
-                card.classList.add('prev');
-            } else if (index === (currentIndex + 1) % totalCards) {
-                card.classList.add('next');
-            } else if (index === (currentIndex - 2 + totalCards) % totalCards) {
-                card.classList.add('far-prev');
-            } else if (index === (currentIndex + 2) % totalCards) {
-                card.classList.add('far-next');
-            } else {
-                // Hide other cards
-                gsap.set(card, { opacity: 0, scale: 0.3 });
-            }
-        });
-        
-        // Update indicators
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === currentIndex);
-        });
-    }
-    
-    // Animate card transitions with GSAP
-    function animateTransition() {
-        if (isTransitioning) return;
-        isTransitioning = true;
-        
-        const timeline = gsap.timeline({
-            onComplete: () => {
-                isTransitioning = false;
-            }
-        });
-        
-        // Animate all cards to their new positions
-        cards.forEach((card, index) => {
-            const currentClass = getCurrentClass(index);
-            const newTransform = getTransformForClass(currentClass);
-            const newOpacity = getOpacityForClass(currentClass);
-            const newScale = getScaleForClass(currentClass);
-            
-            timeline.to(card, {
-                transform: newTransform,
-                opacity: newOpacity,
-                scale: newScale,
-                duration: 0.8,
-                ease: "power3.inOut"
-            }, 0);
-            
-            // Update classes
-            card.className = 'morphing-project-card ' + currentClass;
-        });
-        
-        // Animate indicators
-        timeline.to(indicators, {
-            scale: 1,
-            duration: 0.3,
-            stagger: 0.1
-        }, 0);
-    }
-    
-    // Get the class for a card based on its position relative to current
-    function getCurrentClass(index) {
-        if (index === currentIndex) return 'active';
-        if (index === (currentIndex - 1 + totalCards) % totalCards) return 'prev';
-        if (index === (currentIndex + 1) % totalCards) return 'next';
-        if (index === (currentIndex - 2 + totalCards) % totalCards) return 'far-prev';
-        if (index === (currentIndex + 2) % totalCards) return 'far-next';
-        return 'hidden';
-    }
-    
-    // Get transform values for each class
-    function getTransformForClass(className) {
-        const transforms = {
-            'active': 'translate(-50%, -50%) rotateY(0deg) scale(1.05)',
-            'prev': 'translate(-150%, -50%) rotateY(45deg) scale(0.85)',
-            'next': 'translate(50%, -50%) rotateY(-45deg) scale(0.85)',
-            'far-prev': 'translate(-300%, -50%) rotateY(60deg) scale(0.6)',
-            'far-next': 'translate(200%, -50%) rotateY(-60deg) scale(0.6)',
-            'hidden': 'translate(-50%, -50%) scale(0.3)'
-        };
-        return transforms[className] || transforms['hidden'];
-    }
-    
-    function getOpacityForClass(className) {
-        const opacities = {
-            'active': 1,
-            'prev': 0.7,
-            'next': 0.7,
-            'far-prev': 0.3,
-            'far-next': 0.3,
-            'hidden': 0
-        };
-        return opacities[className] || 0;
-    }
-    
-    function getScaleForClass(className) {
-        const scales = {
-            'active': 1.05,
-            'prev': 0.85,
-            'next': 0.85,
-            'far-prev': 0.6,
-            'far-next': 0.6,
-            'hidden': 0.3
-        };
-        return scales[className] || 0.3;
-    }
-    
-    // Navigation functions
-    function goToNext() {
-        currentIndex = (currentIndex + 1) % totalCards;
-        setInitialPositions();
-        animateTransition();
-        console.log('🎠 Carousel moved to index:', currentIndex);
-    }
-    
-    function goToPrev() {
-        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
-        setInitialPositions();
-        animateTransition();
-        console.log('🎠 Carousel moved to index:', currentIndex);
-    }
-    
-    function goToSlide(index) {
-        if (index === currentIndex || isTransitioning) return;
-        currentIndex = index;
-        setInitialPositions();
-        animateTransition();
-        console.log('🎠 Carousel jumped to index:', currentIndex);
-    }
-    
-    // Event listeners
-    if (nextBtn) {
-        nextBtn.addEventListener('click', goToNext);
-    }
-    
-    if (prevBtn) {
-        prevBtn.addEventListener('click', goToPrev);
-    }
-    
-    // Indicator navigation
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => goToSlide(index));
-    });
-    
-    // Auto-rotate carousel (optional)
-    let autoRotateInterval;
-    
-    function startAutoRotate() {
-        autoRotateInterval = setInterval(goToNext, 5000); // 5 seconds
-    }
-    
-    function stopAutoRotate() {
-        if (autoRotateInterval) {
-            clearInterval(autoRotateInterval);
-        }
-    }
-    
-    // Pause auto-rotation on hover
-    carousel.addEventListener('mouseenter', stopAutoRotate);
-    carousel.addEventListener('mouseleave', startAutoRotate);
-    
-    // Touch/swipe support for mobile
-    let startX = 0;
-    let startY = 0;
-    
-    carousel.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-        stopAutoRotate();
-    });
-    
-    carousel.addEventListener('touchend', (e) => {
-        const endX = e.changedTouches[0].clientX;
-        const endY = e.changedTouches[0].clientY;
-        const deltaX = endX - startX;
-        const deltaY = endY - startY;
-        
-        // Only trigger if horizontal swipe is dominant
-        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-            if (deltaX > 0) {
-                goToPrev(); // Swipe right = previous
-            } else {
-                goToNext(); // Swipe left = next
-            }
-        }
-        
-        startAutoRotate();
-    });
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
-            goToPrev();
-        } else if (e.key === 'ArrowRight') {
-            goToNext();
-        } else if (e.key >= '1' && e.key <= '5') {
-            const index = parseInt(e.key) - 1;
-            if (index < totalCards) {
-                goToSlide(index);
-            }
-        }
-    });
-    
-    // Initialize carousel
-    setInitialPositions();
-    
-    // Add holographic effects
-    cards.forEach((card) => {
-        const holographicImage = card.querySelector('.holographic-image');
-        if (holographicImage) {
-            // Add mouse move effect for holographic illusion
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 10;
-                const rotateY = (centerX - x) / 10;
-                
-                gsap.to(holographicImage, {
-                    transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                gsap.to(holographicImage, {
-                    transform: 'rotateX(0deg) rotateY(0deg)',
-                    duration: 0.5,
-                    ease: "power2.out"
-                });
-            });
-        }
-    });
-    
-    // Start auto-rotation
-    startAutoRotate();
-    
-    console.log('✨ Revolutionary 3D Carousel initialized with', totalCards, 'projects');
-}
-
-// Enhanced 3D effects for regular project cards
-function enhanceProjectCardsWith3D(projectCards) {
-    console.log('🎨 Enhancing', projectCards.length, 'project cards with 3D effects');
-    
-    projectCards.forEach((card, index) => {
-        // Add 3D transform styles
-        card.style.transformStyle = 'preserve-3d';
-        card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
-        
-        // Enhanced hover effects with 3D transforms
-        card.addEventListener('mouseenter', (e) => {
-            gsap.to(card, {
-                scale: 1.05,
-                rotateX: 5,
-                rotateY: 5,
-                z: 50,
-                boxShadow: '0 20px 40px rgba(99, 102, 241, 0.3)',
-                duration: 0.6,
-                ease: "power3.out"
-            });
-            
-            // Add floating animation
-            gsap.to(card, {
-                y: -10,
-                duration: 0.3,
-                ease: "power2.out"
-            });
-        });
-        
-        card.addEventListener('mouseleave', (e) => {
-            gsap.to(card, {
-                scale: 1,
-                rotateX: 0,
-                rotateY: 0,
-                z: 0,
-                y: 0,
-                boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)',
-                duration: 0.6,
-                ease: "power3.out"
-            });
-        });
-        
-        // 3D mouse tracking effect
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
-            
-            gsap.to(card, {
-                rotateX: rotateX,
-                rotateY: rotateY,
-                duration: 0.3,
-                ease: "power2.out"
-            });
-        });
-        
-        // Intersection Observer for scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    // Staggered reveal animation
-                    gsap.fromTo(entry.target, 
-                        {
-                            opacity: 0,
-                            y: 50,
-                            rotateX: 30,
-                            scale: 0.8
-                        }, 
-                        {
-                            opacity: 1,
-                            y: 0,
-                            rotateX: 0,
-                            scale: 1,
-                            duration: 0.8,
-                            delay: index * 0.1,
-                            ease: "power3.out"
-                        }
-                    );
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.2,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
-        observer.observe(card);
-        
-        // Add tilt effect on project images
-        const projectImage = card.querySelector('.project-image-container, .project-icon');
-        if (projectImage) {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width;
-                const y = (e.clientY - rect.top) / rect.height;
-                
-                gsap.to(projectImage, {
-                    rotateX: (y - 0.5) * 20,
-                    rotateY: (0.5 - x) * 20,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                gsap.to(projectImage, {
-                    rotateX: 0,
-                    rotateY: 0,
-                    duration: 0.5,
-                    ease: "power2.out"
-                });
-            });
-        }
-    });
-    
-    // Add scroll-triggered stagger animation for all cards
-    gsap.fromTo(projectCards,
-        {
-            opacity: 0,
-            y: 100,
-            scale: 0.8,
-            rotateX: 30
-        },
-        {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            rotateX: 0,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: projectCards[0]?.parentElement || '.projects',
-                start: 'top 80%',
-                once: true
-            }
-        }
-    );
-    
-    console.log('✨ Enhanced', projectCards.length, 'project cards with 3D effects');
-}
-
-// Fallback Interactive Experience
-function createFallbackInteractiveExperience() {
-    console.log('🌟 Creating fallback interactive experience...');
-    
-    try {
-        // Create floating geometric shapes for visual interest
-        createFloatingShapes();
-        
-        // Add interactive cursor effects
-        enhanceCursorInteractivity();
-        
-        // Create visual feedback for any clickable elements
-        addUniversalClickEffects();
-        
-        console.log('✨ Fallback interactive experience created successfully');
-    } catch (error) {
-        console.warn('⚠️ Fallback experience creation failed:', error.message);
-    }
-}
 
 // Create floating geometric shapes
 function createFloatingShapes() {
@@ -2073,19 +1612,151 @@ function enhanceKeyboardNavigation() {
 // Initialize accessibility enhancements
 document.addEventListener('DOMContentLoaded', () => {
     enhanceKeyboardNavigation();
-});
+    
+/* ========================================
+   GITHUB REPOSITORY FETCH
+======================================== */
 
-// Export functions for testing (if needed)
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        initRevolutionary3DCarousel,
-        enhanceProjectCardsWith3D,
-        createFallbackInteractiveExperience,
-        showErrorNotification,
-        createRippleEffect,
-        optimizeAnimations,
-        enhanceKeyboardNavigation
-    };
+function fetchGitHubRepositories() {
+    // GitHub username
+    const username = 'princedwivedi2';
+    const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&per_page=4`;
+    
+    // Get the container where dynamically loaded projects will be added
+    const projectGrid = document.querySelector('.project-grid');
+    
+    // Only proceed if we found the project grid
+    if (!projectGrid) {
+        console.warn('Project grid container not found');
+        return;
+    }
+    
+    // Check if there's already a loading indicator
+    if (!document.querySelector('.repo-loading')) {
+        const loadingEl = document.createElement('div');
+        loadingEl.className = 'repo-loading';
+        loadingEl.innerHTML = `
+            <div class="loading-spinner"></div>
+            <p>Fetching latest repositories...</p>
+        `;
+        projectGrid.appendChild(loadingEl);
+    }
+    
+    // Fetch repositories from GitHub API
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(repos => {
+            // Remove loading indicator
+            const loadingEl = document.querySelector('.repo-loading');
+            if (loadingEl) {
+                loadingEl.remove();
+            }
+            
+            // Process repositories - filter out forks and pick top 3
+            const filteredRepos = repos.filter(repo => !repo.fork).slice(0, 3);
+            
+            // Remove existing dynamically added repo cards
+            document.querySelectorAll('.dynamic-repo-card').forEach(card => card.remove());
+            
+            // Add each repo as a card before the GitHub profile card
+            filteredRepos.forEach(repo => {
+                // Create language color indicator
+                const languageColor = getLanguageColor(repo.language);
+                
+                // Create repo card
+                const repoCard = document.createElement('div');
+                repoCard.className = 'project-card glass-card dynamic-repo-card';
+                repoCard.setAttribute('data-aos', 'fade-up');
+                
+                repoCard.innerHTML = `
+                    <div class="project-header">
+                        <div class="project-type">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub Repository</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="${repo.html_url}" target="_blank" title="View Source Code">
+                                <i class="fas fa-code"></i>
+                            </a>
+                            ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" title="Live Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>` : ''}
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">${repo.name}</h3>
+                        <p class="project-description">${repo.description || 'No description available'}</p>
+                        <div class="project-tech">
+                            ${repo.language ? `<span class="repo-language">
+                                <span class="language-color" style="background-color: ${languageColor};"></span>
+                                ${repo.language}
+                            </span>` : ''}
+                            <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+                            <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+                        </div>
+                    </div>
+                `;
+                
+                // Find the GitHub profile card
+                const githubProfileCard = document.querySelector('.github-profile-card');
+                
+                // Insert the repo card before the GitHub profile card
+                if (githubProfileCard) {
+                    projectGrid.insertBefore(repoCard, githubProfileCard);
+                } else {
+                    // If profile card doesn't exist, just append to the grid
+                    projectGrid.appendChild(repoCard);
+                }
+            });
+            
+            // Re-initialize AOS for the new elements
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh();
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching GitHub repositories:', error);
+            
+            // Remove loading indicator and show error message
+            const loadingEl = document.querySelector('.repo-loading');
+            if (loadingEl) {
+                loadingEl.innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Could not fetch repositories. Please try again later.</p>
+                    </div>
+                `;
+            }
+        });
 }
+
+// Helper function to get language colors
+function getLanguageColor(language) {
+    const colors = {
+        'JavaScript': '#f1e05a',
+        'TypeScript': '#2b7489',
+        'Python': '#3572A5',
+        'Java': '#b07219',
+        'HTML': '#e34c26',
+        'CSS': '#563d7c',
+        'PHP': '#4F5D95',
+        'Ruby': '#701516',
+        'C#': '#178600',
+        'Go': '#00ADD8',
+        'Swift': '#ffac45',
+        'Kotlin': '#F18E33'
+    };
+    
+    return colors[language] || '#6c757d';
+}
+
+// Call the function to fetch GitHub repositories
+fetchGitHubRepositories();
+});
 
 console.log('🎉 Enhanced Script.js loaded successfully! All functionalities optimized and error-handled.');

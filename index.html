@@ -3,1231 +3,674 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prince's Portfolio - Select Mode</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Prince Portfolio | Choose Your Experience</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- GSAP for Advanced Animations -->
+    <!-- GSAP for animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     <style>
         :root {
+            /* Primary Colors - Match with your existing theme */
             --primary-color: #2563eb;
             --secondary-color: #7c3aed;
             --accent-color: #06b6d4;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --dark-bg: #0f0f23;
-            --darker-bg: #0a0a1a;
-            --text-light: #ffffff;
-            --text-muted: #94a3b8;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
+            
+            /* Developer Mode Colors */
+            --dev-primary: #00f7ff;
+            --dev-secondary: #0099ff;
+            --cyber-purple: #8000ff;
+            
+            /* Business Mode Colors */
+            --business-primary: #2563eb;
+            --business-secondary: #7c3aed;
+            
+            /* Background Colors */
+            --bg-dark: #0a0a1a;
+            --bg-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            
+            /* Text Colors */
+            --text-primary: #ffffff;
+            --text-secondary: #b4b4d6;
+            --text-muted: #8a8aaa;
+            
+            /* Effects */
+            --glass-bg: rgba(30, 41, 59, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --glass-blur: blur(10px);
+            
+            /* Transitions */
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            background: var(--bg-dark);
+            color: var(--text-primary);
             min-height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Enhanced Neural Network Background */
-        .neural-network {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.4) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.4) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
-            animation: morphBg 20s ease-in-out infinite;
-        }
-
-        @keyframes morphBg {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-            33% { transform: scale(1.05) rotate(1deg); opacity: 0.8; }
-            66% { transform: scale(0.98) rotate(-1deg); opacity: 0.9; }
-        }
-
-        /* Floating Code Elements */
-        .floating-code {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.1;
-        }
-
-        .code-symbol {
-            position: absolute;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
-            color: var(--accent-color);
-            animation: floatCode 15s linear infinite;
-        }
-
-        @keyframes floatCode {
-            0% { 
-                transform: translateY(100vh) rotate(0deg); 
-                opacity: 0; 
-            }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { 
-                transform: translateY(-100px) rotate(360deg); 
-                opacity: 0; 
-            }
-        }
-
-        /* Matrix Rain Effect */
-        .matrix-rain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .matrix-column {
-            position: absolute;
-            top: -100%;
-            width: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            color: rgba(0, 255, 100, 0.8);
-            text-shadow: 0 0 10px rgba(0, 255, 100, 0.5);
-        }
-
-        /* Holographic Overlay */
-        .holographic-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(45deg, transparent 48%, rgba(0, 255, 255, 0.03) 49%, rgba(0, 255, 255, 0.03) 51%, transparent 52%),
-                linear-gradient(-45deg, transparent 48%, rgba(255, 0, 255, 0.03) 49%, rgba(255, 0, 255, 0.03) 51%, transparent 52%);
-            background-size: 20px 20px;
-            animation: holographicShimmer 8s ease-in-out infinite;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        @keyframes holographicShimmer {
-            0%, 100% { opacity: 0.5; transform: translateX(0); }
-            50% { opacity: 0.8; transform: translateX(10px); }
-        }
-
-        /* Main Container with Glassmorphism */
-        .mode-selector {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            padding: 2rem;
-            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 3rem 0;
+        }
+        
+        /* Particles Background */
+        #tsparticles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        /* Main Container */
+        .container {
             position: relative;
             z-index: 10;
-        }
-
-        /* Enhanced Logo Section */
-        .logo-section {
-            margin-bottom: 3rem;
-            animation: slideDown 1s ease-out;
-            position: relative;
-        }
-
-        .logo-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .logo-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #ffffff, #e0e7ff, #c7d2fe, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-            margin-bottom: 1rem;
-            position: relative;
-            animation: logoGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes logoGlow {
-            0% { filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.5)); }
-            100% { filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.8)); }
-        }
-
-        .logo-text::before {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: linear-gradient(135deg, #06b6d4, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: glitchEffect 4s ease-in-out infinite;
-        }
-
-        @keyframes glitchEffect {
-            0%, 90%, 100% { transform: translate(0); }
-            92% { transform: translate(2px, -2px); }
-            94% { transform: translate(-2px, 2px); }
-            96% { transform: translate(2px, 1px); }
-        }
-
-        .tagline {
-            font-size: 1.3rem;
-            color: var(--text-muted);
-            font-weight: 400;
-            font-family: 'JetBrains Mono', monospace;
-            opacity: 0.9;
-        }
-
-        /* Neural Network Connections */
-        .neural-connections {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .connection-line {
-            position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.6), transparent);
-            transform-origin: left center;
-            animation: connectionPulse 4s ease-in-out infinite;
-        }
-
-        @keyframes connectionPulse {
-            0%, 100% { opacity: 0; transform: scaleX(0); }
-            50% { opacity: 1; transform: scaleX(1); }
-        }
-
-        /* Selection Section with 3D Effects */
-        .selection-section {
-            animation: fadeInUp 1s ease-out 0.3s both;
-            position: relative;
-        }
-
-        .selection-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-        }
-
-        .selection-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-            max-width: 700px;
-            line-height: 1.6;
-        }
-
-        /* Enhanced Mode Cards with 3D Transform */
-        .mode-cards {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            max-width: 1000px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem;
             margin: 0 auto;
-            perspective: 1000px;
         }
-
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease;
+        }
+        
+        .logo-container {
+            display: inline-block;
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo-text {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        
+        .logo-accent {
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+            animation: pulse 2s infinite;
+        }
+        
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            opacity: 0.8;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+        
+        /* Selection Section */
+        .selection-section {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease 0.3s both;
+        }
+        
+        .selection-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .selection-subtitle {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        /* Mode Cards */
+        .modes-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+        
         .mode-card {
+            width: 340px;
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
+            backdrop-filter: var(--glass-blur);
             border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 3rem 2.5rem;
-            cursor: pointer;
+            border-radius: 16px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: var(--glass-shadow);
             transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .mode-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card-header {
+            height: 140px;
             position: relative;
             overflow: hidden;
-            min-height: 400px;
+        }
+        
+        .card-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.3;
+        }
+        
+        .business-card .card-pattern {
+            background: linear-gradient(135deg, var(--business-primary), var(--business-secondary));
+        }
+        
+        .dev-card .card-pattern {
+            background: linear-gradient(135deg, var(--dev-primary), var(--cyber-purple));
+        }
+        
+        .card-header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 30%, rgba(10, 10, 26, 0.5) 100%);
+            z-index: 1;
+        }
+        
+        .card-icon-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            transform-style: preserve-3d;
+            z-index: 2;
         }
-
-        /* Animated Card Border */
-        .mode-card::before {
+        
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        
+        .business-card .card-icon {
+            color: var(--business-primary);
+        }
+        
+        .dev-card .card-icon {
+            color: var(--dev-primary);
+        }
+        
+        .card-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            transition: all 0.4s ease;
+        }
+        
+        .card-icon i {
+            position: relative;
+            z-index: 3;
+        }
+        
+        .business-card .card-icon i {
+            text-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+        }
+        
+        .dev-card .card-icon i {
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
+        
+        .mode-card:hover .card-icon {
+            transform: scale(1.1);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .card-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Tags */
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tag {
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .business-card .tag {
+            color: rgba(124, 58, 237, 0.9);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+        
+        .dev-card .tag {
+            color: rgba(0, 247, 255, 0.9);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+        }
+        
+        .mode-card:hover .tag {
+            transform: translateY(-2px);
+        }
+        
+        /* Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-business {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
+        }
+        
+        .btn-dev {
+            background: linear-gradient(135deg, #00f7ff, #0099ff);
+            color: var(--bg-dark);
+            box-shadow: 0 10px 15px -3px rgba(0, 247, 255, 0.4);
+        }
+        
+        .btn::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            border-radius: 25px;
-            padding: 2px;
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
-            animation: borderRotate 3s linear infinite;
-        }
-
-        @keyframes borderRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Card Hover Effects */
-        .mode-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            border-color: var(--primary-color);
-            box-shadow: 
-                0 25px 50px rgba(37, 99, 235, 0.4),
-                0 0 100px rgba(37, 99, 235, 0.2);
-        }
-
-        .developer-card:hover {
-            border-color: var(--success-color);
-            box-shadow: 
-                0 25px 50px rgba(16, 185, 129, 0.4),
-                0 0 100px rgba(16, 185, 129, 0.2);
-        }
-
-        /* Floating Icons with 3D Effect */
-        .mode-icon {
-            font-size: 5rem;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 5px 15px rgba(37, 99, 235, 0.4));
-            animation: floatIcon 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes floatIcon {
-            0% { transform: translateY(0) scale(1); }
-            100% { transform: translateY(-10px) scale(1.05); }
-        }
-
-        .developer-card .mode-icon {
-            background: linear-gradient(135deg, var(--success-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 5px 15px rgba(16, 185, 129, 0.4));
-        }
-
-        .mode-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .mode-description {
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-
-        /* Enhanced Feature Lists */
-        .mode-features {
-            list-style: none;
-            text-align: left;
+            left: -100%;
             width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s ease;
         }
-
-        .mode-features li {
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin-bottom: 0.8rem;
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .btn i {
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            transition: var(--transition);
-            padding: 0.5rem;
-            border-radius: 10px;
-        }
-
-        .mode-features li:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateX(5px);
-            color: var(--text-light);
-        }
-
-        .mode-features li i {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            width: 20px;
-            text-align: center;
-        }
-
-        .developer-card .mode-features li i {
-            color: var(--success-color);
-        }
-
-        /* Tech Stack Preview */
-        .tech-preview {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
             justify-content: center;
-            margin-top: 2rem;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
-
-        .tech-tag {
-            padding: 0.5rem 1rem;
-            background: rgba(16, 185, 129, 0.2);
-            border: 1px solid rgba(16, 185, 129, 0.4);
-            border-radius: 15px;
-            font-size: 0.8rem;
-            color: var(--success-color);
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 500;
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top: 3px solid var(--primary-color);
+            animation: spin 1s linear infinite;
         }
-
-        .tech-tag:hover {
-            background: rgba(16, 185, 129, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .modes-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 2.5rem;
+            }
+            
+            .mode-card {
+                width: 100%;
+                max-width: 340px;
+            }
+            
+            .logo-text {
+                font-size: 2.5rem;
+            }
+            
+            .selection-title {
+                font-size: 1.75rem;
+            }
+            
+            .selection-subtitle {
+                font-size: 1rem;
+            }
+            
+            body {
+                padding: 2rem 0 4rem;
+            }
         }
-
-        /* Advanced Animations */
-        @keyframes slideDown {
+        
+        /* Animations */
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-50px) rotateX(-90deg);
+                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0) rotateX(0deg);
+                transform: translateY(0);
             }
         }
-
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(50px) scale(0.9);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: translateY(0);
             }
         }
-
-        /* Enhanced Loading Animation */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.5s ease;
-        }
-
-        .loading-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .loading-content {
-            text-align: center;
-            position: relative;
-        }
-
-        .loading-content h3 {
-            color: var(--text-light);
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            font-family: 'Orbitron', sans-serif;
-            animation: loadingPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes loadingPulse {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
-        }
-
-        /* Futuristic Loading Bar */
-        .loading-bar {
-            width: 400px;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid rgba(6, 182, 212, 0.3);
-        }
-
-        .loading-progress {
-            height: 100%;
-            background: linear-gradient(90deg, 
-                var(--primary-color), 
-                var(--secondary-color), 
-                var(--accent-color),
-                var(--primary-color));
-            background-size: 200% 100%;
-            border-radius: 3px;
-            transform: translateX(-100%);
-            animation: loadingProgress 2s ease-in-out forwards,
-                       progressShimmer 1s ease-in-out infinite;
-        }
-
-        @keyframes loadingProgress {
-            to {
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes progressShimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* AI Assistant Avatar */
-        .ai-assistant {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1000;
-            transition: var(--transition);
-            animation: aiPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes aiPulse {
-            0%, 100% { 
-                box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
-                transform: scale(1);
-            }
-            50% { 
-                box-shadow: 0 0 30px rgba(124, 58, 237, 0.8);
-                transform: scale(1.05);
-            }
-        }
-
-        .ai-assistant:hover {
-            transform: scale(1.1);
-            animation: none;
-            box-shadow: 0 0 40px rgba(37, 99, 235, 1);
-        }
-
-        .ai-assistant i {
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        /* Sound Visualization */
-        .sound-visualizer {
-            position: fixed;
-            bottom: 2rem;
-            left: 2rem;
-            display: flex;
-            gap: 3px;
-            align-items: end;
-            height: 40px;
-            z-index: 1000;
-        }
-
-        .sound-bar {
-            width: 3px;
-            background: linear-gradient(to top, var(--accent-color), var(--primary-color));
-            border-radius: 2px;
-            animation: soundWave 1s ease-in-out infinite;
-        }
-
-        .sound-bar:nth-child(1) { height: 20px; animation-delay: 0s; }
-        .sound-bar:nth-child(2) { height: 30px; animation-delay: 0.1s; }
-        .sound-bar:nth-child(3) { height: 25px; animation-delay: 0.2s; }
-        .sound-bar:nth-child(4) { height: 35px; animation-delay: 0.3s; }
-        .sound-bar:nth-child(5) { height: 20px; animation-delay: 0.4s; }
-
-        @keyframes soundWave {
-            0%, 100% { height: 10px; opacity: 0.5; }
-            50% { height: 40px; opacity: 1; }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .mode-cards {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                max-width: 400px;
-            }
-
-            .logo-text {
-                font-size: 2.8rem;
-            }
-
-            .selection-title {
-                font-size: 2rem;
-            }
-
-            .mode-card {
-                padding: 2rem 1.5rem;
-                min-height: 350px;
-            }
-
-            .mode-icon {
-                font-size: 3.5rem;
-            }
-
-            .mode-title {
-                font-size: 1.6rem;
-            }
-
-            .loading-bar {
-                width: 300px;
-            }
-
-            .ai-assistant,
-            .sound-visualizer {
-                display: none;
-            }
-        }
-
-        /* Keyboard Navigation Indicators */
-        .keyboard-hint {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 1rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            z-index: 1000;
-            animation: slideInRight 1s ease-out 2s both;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100px);
-            }
-            to {
+        
+        @keyframes pulse {
+            0%, 100% {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: translateX(-50%) scale(1.1);
             }
         }
-
-        .keyboard-hint h4 {
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .keyboard-hint p {
-            margin: 0.2rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .key {
-            background: rgba(37, 99, 235, 0.2);
-            color: var(--primary-color);
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-weight: bold;
-            border: 1px solid rgba(37, 99, 235, 0.3);
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <!-- Enhanced Neural Network Background -->
-    <div class="neural-network"></div>
-    <div class="holographic-overlay"></div>
-    <div class="floating-code" id="floatingCode"></div>
-    <div class="matrix-rain" id="matrixRain"></div>
-
-    <!-- AI Assistant -->
-    <div class="ai-assistant" id="aiAssistant" title="AI Assistant">
-        <i class="fas fa-robot"></i>
-    </div>
-
-    <!-- Sound Visualizer -->
-    <div class="sound-visualizer">
-        <div class="sound-bar"></div>
-        <div class="sound-bar"></div>
-        <div class="sound-bar"></div>
-        <div class="sound-bar"></div>
-        <div class="sound-bar"></div>
-    </div>
-
-    <!-- Keyboard Navigation Hints -->
-    <div class="keyboard-hint">
-        <h4><i class="fas fa-keyboard"></i> Quick Keys</h4>
-        <p><span class="key">1</span> or <span class="key">U</span> - Client Mode</p>
-        <p><span class="key">2</span> or <span class="key">D</span> - Developer Mode</p>
-        <p><span class="key">Space</span> - AI Assistant</p>
-    </div>
-
-    <!-- Main Mode Selector -->
-    <div class="mode-selector">
-        <!-- Enhanced Logo Section -->
-        <div class="logo-section">
+    <!-- Particles Background - Will be initialized via script -->
+    <div id="tsparticles"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
             <div class="logo-container">
-                <h1 class="logo-text" data-text="Prince">Prince</h1>
-                <div class="neural-connections" id="neuralConnections"></div>
+                <h1 class="logo-text">Prince Dwivedi</h1>
+                <div class="logo-accent"></div>
             </div>
-            <p class="tagline">>>> Full-Stack Developer & Creative Innovator</p>
-        </div>
-
+            <p class="tagline">Full-Stack Developer & AI Innovator</p>
+            <div class="subtitle">
+                <i class="fas fa-code"></i> portfolio --select-mode
+            </div>
+        </header>
+        
         <!-- Selection Section -->
-        <div class="selection-section">
+        <section class="selection-section">
             <h2 class="selection-title">Choose Your Experience</h2>
             <p class="selection-subtitle">
-                I've crafted two unique portfolio experiences tailored to different audiences. 
-                Choose the version that best fits your perspective!
+                Select a viewing mode tailored to your interests
             </p>
-
+            
             <!-- Mode Cards -->
-            <div class="mode-cards">
-                <!-- User Mode -->
-                <div class="mode-card user-card" onclick="selectMode('user')">
-                    <i class="fas fa-users mode-icon"></i>
-                    <h3 class="mode-title">I'm a Client/User</h3>
-                    <p class="mode-description">
-                        Clean, professional showcase focusing on business impact and user-friendly presentation.
-                    </p>
-                    <ul class="mode-features">
-                        <li><i class="fas fa-check"></i> Business-focused project presentations</li>
-                        <li><i class="fas fa-chart-line"></i> ROI and impact metrics</li>
-                        <li><i class="fas fa-mobile-alt"></i> User experience highlights</li>
-                        <li><i class="fas fa-handshake"></i> Client testimonials</li>
-                        <li><i class="fas fa-rocket"></i> Results-driven showcase</li>
-                    </ul>
+            <div class="modes-container">
+                <!-- Business Card -->
+                <div class="mode-card business-card" onclick="selectMode('user')">
+                    <div class="card-header">
+                        <div class="card-pattern"></div>
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <h3 class="card-title">Business View</h3>
+                        <p class="card-description">
+                            Explore business solutions, case studies, and professional projects
+                        </p>
+                        
+                        <div class="card-tags">
+                            <span class="tag">Case Studies</span>
+                            <span class="tag">Results</span>
+                            <span class="tag">Solutions</span>
+                        </div>
+                        
+                        <button class="btn btn-business">
+                            Explore <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
                 </div>
-
-                <!-- Developer Mode -->
-                <div class="mode-card developer-card" onclick="selectMode('developer')">
-                    <i class="fas fa-code mode-icon"></i>
-                    <h3 class="mode-title">I'm a Developer</h3>
-                    <p class="mode-description">
-                        Technical deep-dive with architecture details, code samples, and implementation insights.
-                    </p>
-                    <ul class="mode-features">
-                        <li><i class="fas fa-terminal"></i> Code architecture & patterns</li>
-                        <li><i class="fab fa-github"></i> Repository links & commits</li>
-                        <li><i class="fas fa-cogs"></i> Technical implementation</li>
-                        <li><i class="fas fa-database"></i> Database design & APIs</li>
-                        <li><i class="fas fa-bug"></i> Problem-solving approaches</li>
-                    </ul>
-                    <div class="tech-preview">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">MongoDB</span>
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">AWS</span>
+                
+                <!-- Developer Card -->
+                <div class="mode-card dev-card" onclick="selectMode('developer')">
+                    <div class="card-header">
+                        <div class="card-pattern"></div>
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <h3 class="card-title">Developer View</h3>
+                        <p class="card-description">
+                            Dive into technical projects, code samples, and development insights
+                        </p>
+                        
+                        <div class="card-tags">
+                            <span class="tag">Projects</span>
+                            <span class="tag">Code</span>
+                            <span class="tag">Tech Stack</span>
+                        </div>
+                        
+                        <button class="btn btn-dev">
+                            Discover <i class="fas fa-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
-
-        <!-- Enhanced Loading Overlay -->
-        <div class="loading-overlay" id="loadingOverlay">
-            <div class="loading-content">
-                <h3 id="loadingText">Initializing Neural Networks...</h3>
-                <div class="loading-bar">
-                    <div class="loading-progress"></div>
-                </div>
-                <p style="color: var(--text-muted); margin-top: 1rem; font-family: 'JetBrains Mono', monospace;">
-                    <span id="loadingProgress">0</span>% Complete
-                </p>
-            </div>
-        </div>
-
-        <script>
-            // Initialize GSAP
-            gsap.registerPlugin(ScrollTrigger);
-
-            // Enhanced Portfolio Initialization
-            document.addEventListener('DOMContentLoaded', function() {
-                initializeEnhancedPortfolio();
-            });
-
-            function initializeEnhancedPortfolio() {
-                console.log('🚀 Initializing Enhanced Portfolio Experience...');
-                
-                // Core animations
-                initLogoAnimations();
-                initFloatingCode();
-                initMatrixRain();
-                initNeuralConnections();
-                initAIAssistant();
-                initInteractiveElements();
-                
-                console.log('✨ Portfolio Enhanced Successfully!');
-            }
-
-            // Logo 3D Animations
-            function initLogoAnimations() {
-                const logoText = document.querySelector('.logo-text');
-                if (logoText) {
-                    gsap.fromTo(logoText, 
-                        { 
-                            y: -100, 
-                            opacity: 0, 
-                            rotationX: -90,
-                            scale: 0.5
-                        },
-                        { 
-                            y: 0, 
-                            opacity: 1, 
-                            rotationX: 0,
-                            scale: 1,
-                            duration: 1.5,
-                            ease: "back.out(1.7)",
-                            delay: 0.5
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- tsParticles JS -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    
+    <script>
+        // Initialize Particles
+        document.addEventListener('DOMContentLoaded', function() {
+            tsParticles.load("tsparticles", {
+                fpsLimit: 60,
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800
                         }
-                    );
-                }
-            }
-
-            // Floating Code Animation
-            function initFloatingCode() {
-                const codeSymbols = ['{}', '[]', '()', '<>', '&&', '||', '=>', '!=', '==', '++', '--', '//', '/*', '*/', 'if', 'for', 'let', 'const', 'var', 'function', 'class', 'import', 'export'];
-                const container = document.getElementById('floatingCode');
-                
-                function createCodeSymbol() {
-                    const symbol = document.createElement('div');
-                    symbol.className = 'code-symbol';
-                    symbol.textContent = codeSymbols[Math.floor(Math.random() * codeSymbols.length)];
-                    symbol.style.left = Math.random() * 100 + '%';
-                    symbol.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                    symbol.style.animationDelay = Math.random() * 5 + 's';
-                    
-                    container.appendChild(symbol);
-                    
-                    setTimeout(() => {
-                        if (symbol.parentNode) {
-                            symbol.parentNode.removeChild(symbol);
-                        }
-                    }, 20000);
-                }
-                
-                // Create initial symbols
-                for (let i = 0; i < 15; i++) {
-                    setTimeout(() => createCodeSymbol(), i * 1000);
-                }
-                
-                // Continue creating symbols
-                setInterval(createCodeSymbol, 2000);
-            }
-
-            // Matrix Rain Effect
-            function initMatrixRain() {
-                const container = document.getElementById('matrixRain');
-                const chars = '01';
-                
-                function createMatrixColumn() {
-                    const column = document.createElement('div');
-                    column.className = 'matrix-column';
-                    column.style.left = Math.random() * 100 + '%';
-                    column.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                    
-                    let content = '';
-                    for (let i = 0; i < 20; i++) {
-                        content += chars[Math.floor(Math.random() * chars.length)] + '<br>';
+                    },
+                    color: {
+                        value: ["#2563eb", "#7c3aed", "#00f7ff"]
+                    },
+                    shape: {
+                        type: "circle"
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: true
+                    },
+                    size: {
+                        value: 3,
+                        random: true
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
                     }
-                    column.innerHTML = content;
-                    
-                    container.appendChild(column);
-                    
-                    gsap.fromTo(column, 
-                        { y: '-100%', opacity: 0 },
-                        { 
-                            y: '100vh', 
-                            opacity: 1, 
-                            duration: Math.random() * 3 + 2,
-                            ease: "none",
-                            onComplete: () => {
-                                if (column.parentNode) {
-                                    column.parentNode.removeChild(column);
-                                }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "grab"
+                        }
+                    },
+                    modes: {
+                        grab: {
+                            distance: 140,
+                            line_linked: {
+                                opacity: 0.5
                             }
                         }
-                    );
-                }
-                
-                // Create columns periodically
-                for (let i = 0; i < 8; i++) {
-                    setTimeout(() => createMatrixColumn(), i * 500);
-                }
-                setInterval(createMatrixColumn, 3000);
-            }
-
-            // Neural Network Connections
-            function initNeuralConnections() {
-                const container = document.getElementById('neuralConnections');
-                
-                function createConnection() {
-                    const line = document.createElement('div');
-                    line.className = 'connection-line';
-                    line.style.width = Math.random() * 200 + 100 + 'px';
-                    line.style.left = Math.random() * 100 + '%';
-                    line.style.top = Math.random() * 100 + '%';
-                    line.style.transform = `rotate(${Math.random() * 360}deg)`;
-                    line.style.animationDelay = Math.random() * 2 + 's';
-                    
-                    container.appendChild(line);
-                    
-                    setTimeout(() => {
-                        if (line.parentNode) {
-                            line.parentNode.removeChild(line);
-                        }
-                    }, 4000);
-                }
-                
-                // Create connections
-                for (let i = 0; i < 10; i++) {
-                    setTimeout(() => createConnection(), i * 400);
-                }
-                setInterval(createConnection, 2000);
-            }
-
-            // AI Assistant Functionality
-            function initAIAssistant() {
-                const aiAssistant = document.getElementById('aiAssistant');
-                let isActive = false;
-                
-                aiAssistant.addEventListener('click', () => {
-                    if (!isActive) {
-                        isActive = true;
-                        aiAssistant.innerHTML = '<i class="fas fa-brain"></i>';
-                        
-                        // Create AI response effect
-                        createAIResponse();
-                        
-                        setTimeout(() => {
-                            isActive = false;
-                            aiAssistant.innerHTML = '<i class="fas fa-robot"></i>';
-                        }, 3000);
                     }
-                });
-                
-                function createAIResponse() {
-                    const responses = [
-                        "🤖 Neural pathways activated!",
-                        "🧠 Processing creative algorithms...",
-                        "⚡ Quantum computations initiated!",
-                        "🌟 Innovation protocols engaged!",
-                        "🚀 Ready to code the future!"
-                    ];
-                    
-                    const response = responses[Math.floor(Math.random() * responses.length)];
-                    showNotification(response);
-                }
-            }
-
-            // Enhanced Mode Selection
-            function selectMode(mode) {
-                const loadingOverlay = document.getElementById('loadingOverlay');
-                const loadingText = document.getElementById('loadingText');
-                const progressElement = document.getElementById('loadingProgress');
-                
-                // Show loading overlay with animation
-                gsap.to(loadingOverlay, { 
-                    opacity: 1, 
-                    visibility: 'visible', 
-                    duration: 0.5 
-                });
-                
-                // Update loading text based on mode
-                const loadingMessages = {
-                    developer: [
-                        'Initializing Developer Environment...',
-                        'Loading Terminal Interfaces...',
-                        'Compiling Code Samples...',
-                        'Activating Technical Mode...'
-                    ],
-                    user: [
-                        'Preparing Professional Showcase...',
-                        'Loading Portfolio Assets...',
-                        'Optimizing User Experience...',
-                        'Activating Client Mode...'
-                    ]
-                };
-                
-                const messages = loadingMessages[mode];
-                let messageIndex = 0;
-                let progress = 0;
-                
-                const updateProgress = () => {
-                    progress += Math.random() * 25 + 10;
-                    if (progress > 100) progress = 100;
-                    
-                    progressElement.textContent = Math.floor(progress);
-                    
-                    if (messageIndex < messages.length - 1) {
-                        messageIndex++;
-                        loadingText.textContent = messages[messageIndex];
-                    }
-                    
-                    if (progress < 100) {
-                        setTimeout(updateProgress, 500);
-                    }
-                };
-                
-                loadingText.textContent = messages[0];
-                updateProgress();
-                
-                // Store the selected mode
-                localStorage.setItem('portfolioMode', mode);
-                localStorage.setItem('modeSelectedAt', new Date().toISOString());
-                
-                // Play selection sound (visual feedback)
-                createClickEffect(window.innerWidth / 2, window.innerHeight / 2, mode);
-                
-                // Redirect after loading animation
-                setTimeout(() => {
-                    if (mode === 'developer') {
-                        window.location.href = 'developer-portfolio.html';
-                    } else {
-                        window.location.href = 'interactive-portfolio.html';
-                    }
-                }, 3000);
-            }
-
-            // Enhanced Click Effects
-            function createClickEffect(x, y, mode = 'default') {
-                const colors = {
-                    developer: ['#10b981', '#06b6d4'],
-                    user: ['#2563eb', '#7c3aed'],
-                    default: ['#2563eb', '#7c3aed']
-                };
-                
-                for (let i = 0; i < 12; i++) {
-                    const particle = document.createElement('div');
-                    particle.style.position = 'fixed';
-                    particle.style.left = x + 'px';
-                    particle.style.top = y + 'px';
-                    particle.style.width = '4px';
-                    particle.style.height = '4px';
-                    particle.style.background = colors[mode][Math.floor(Math.random() * colors[mode].length)];
-                    particle.style.borderRadius = '50%';
-                    particle.style.pointerEvents = 'none';
-                    particle.style.zIndex = '9999';
-                    
-                    document.body.appendChild(particle);
-                    
-                    const angle = (i / 12) * Math.PI * 2;
-                    const distance = 100 + Math.random() * 100;
-                    
-                    gsap.to(particle, {
-                        x: Math.cos(angle) * distance,
-                        y: Math.sin(angle) * distance,
-                        opacity: 0,
-                        scale: 0,
-                        duration: 1,
-                        ease: "power2.out",
-                        onComplete: () => {
-                            if (particle.parentNode) {
-                                particle.parentNode.removeChild(particle);
-                            }
-                        }
-                    });
-                }
-            }
-
-            // Interactive Elements
-            function initInteractiveElements() {
-                // Mode card animations
-                const modeCards = document.querySelectorAll('.mode-card');
-                
-                modeCards.forEach((card, index) => {
-                    // Initial animation
-                    gsap.fromTo(card, 
-                        { 
-                            y: 100, 
-                            opacity: 0, 
-                            rotationX: -45,
-                            scale: 0.8
-                        },
-                        { 
-                            y: 0, 
-                            opacity: 1, 
-                            rotationX: 0,
-                            scale: 1,
-                            duration: 1,
-                            delay: 1 + (index * 0.3),
-                            ease: "back.out(1.7)"
-                        }
-                    );
-                    
-                    // Interactive hover effects
-                    card.addEventListener('mouseenter', () => {
-                        gsap.to(card, {
-                            y: -10,
-                            rotationX: 5,
-                            rotationY: 5,
-                            duration: 0.3,
-                            ease: "power2.out"
-                        });
-                    });
-                    
-                    card.addEventListener('mouseleave', () => {
-                        gsap.to(card, {
-                            y: 0,
-                            rotationX: 0,
-                            rotationY: 0,
-                            duration: 0.3,
-                            ease: "power2.out"
-                        });
-                    });
-                    
-                    // 3D mouse tracking
-                    card.addEventListener('mousemove', (e) => {
-                        const rect = card.getBoundingClientRect();
-                        const centerX = rect.left + rect.width / 2;
-                        const centerY = rect.top + rect.height / 2;
-                        const rotateX = (e.clientY - centerY) / 10;
-                        const rotateY = -(e.clientX - centerX) / 10;
-                        
-                        gsap.to(card, {
-                            rotationX: rotateX,
-                            rotationY: rotateY,
-                            duration: 0.1,
-                            ease: "none"
-                        });
-                    });
-                });
-            }
-
-            // Notification System
-            function showNotification(message) {
-                const notification = document.createElement('div');
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    background: rgba(37, 99, 235, 0.9);
-                    color: white;
-                    padding: 1rem 2rem;
-                    border-radius: 50px;
-                    font-family: 'JetBrains Mono', monospace;
-                    font-size: 1rem;
-                    z-index: 10000;
-                    backdrop-filter: blur(10px);
-                    border: 1px solid rgba(255, 255, 255, 0.2);
-                    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.5);
-                `;
-                notification.textContent = message;
-                
-                document.body.appendChild(notification);
-                
-                gsap.fromTo(notification, 
-                    { scale: 0, opacity: 0 },
-                    { 
-                        scale: 1, 
-                        opacity: 1, 
-                        duration: 0.3, 
-                        ease: "back.out(1.7)" 
-                    }
-                );
-                
-                setTimeout(() => {
-                    gsap.to(notification, {
-                        scale: 0,
-                        opacity: 0,
-                        duration: 0.3,
-                        onComplete: () => {
-                            if (notification.parentNode) {
-                                notification.parentNode.removeChild(notification);
-                            }
-                        }
-                    });
-                }, 3000);
-            }
-
-            // Enhanced Keyboard Navigation
-            document.addEventListener('keydown', (e) => {
-                if (e.key === '1' || e.key === 'u' || e.key === 'U') {
-                    e.preventDefault();
-                    selectMode('user');
-                } else if (e.key === '2' || e.key === 'd' || e.key === 'D') {
-                    e.preventDefault();
-                    selectMode('developer');
-                } else if (e.key === ' ') {
-                    e.preventDefault();
-                    document.getElementById('aiAssistant').click();
-                }
+                },
+                retina_detect: true
             });
-
-            // Enhanced Click Detection
-            document.addEventListener('click', (e) => {
-                // Don't create effects for button clicks
-                if (!e.target.closest('.mode-card, .ai-assistant, .loading-overlay')) {
-                    createClickEffect(e.clientX, e.clientY);
-                }
-            });
-
-            // Performance Optimization
-            let ticking = false;
+        });
+        
+        // Mode Selection
+        function selectMode(mode) {
+            const overlay = document.getElementById('loadingOverlay');
             
-            function updateAnimations() {
-                // Update any continuous animations here
-                if (!ticking) {
-                    requestAnimationFrame(updateAnimations);
-                    ticking = true;
-                }
-                ticking = false;
-            }
+            // Show loading overlay
+            overlay.style.opacity = '1';
+            overlay.style.visibility = 'visible';
             
-            updateAnimations();
-        </script>
+            // Store preference
+            localStorage.setItem('portfolioMode', mode);
+            
+            // Navigate to appropriate portfolio
+            setTimeout(() => {
+                if (mode === 'developer') {
+                    window.location.href = 'developer-portfolio-v2.html';
+                } else {
+                    window.location.href = 'interactive-portfolio.html';
+                }
+            }, 800);
+        }
+    </script>
 </body>
 </html>

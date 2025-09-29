@@ -28,22 +28,7 @@
     <!-- Skip link for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    <!-- User Mode Badge -->
-    <div class="user-badge" style="
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        z-index: 1001;
-        animation: pulse 2s infinite;
-    ">
-        <i class="fas fa-users"></i> USER MODE
-    </div>
+
     
     <!-- Custom Cursor -->
     <div class="cursor"></div>
@@ -613,6 +598,123 @@
         </div>
     </section>
 
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">My Projects</h2>
+                <div class="section-line"></div>
+                <p class="section-description">Check out my recent work and open-source projects</p>
+            </div>
+
+            <div class="projects-container">
+                <!-- GitHub Projects Grid -->
+                <div class="project-grid">
+                    <!-- Project Card 1 -->
+                    <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="project-header">
+                            <div class="project-type">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub Repository</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/princedwivedi2/new-p" target="_blank" title="View Source Code">
+                                    <i class="fas fa-code"></i>
+                                </a>
+                                <a href="https://princedwivedi2.github.io/new-p/" target="_blank" title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Interactive Portfolio</h3>
+                            <p class="project-description">Modern interactive portfolio website with 3D elements, animations, and responsive design.</p>
+                            <div class="project-tech">
+                                <span>HTML5</span>
+                                <span>CSS3</span>
+                                <span>JavaScript</span>
+                                <span>GSAP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2 -->
+                    <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="project-header">
+                            <div class="project-type">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub Repository</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/princedwivedi2" target="_blank" title="View Source Code">
+                                    <i class="fas fa-code"></i>
+                                </a>
+                                <a href="#" target="_blank" title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Laravel Web Application</h3>
+                            <p class="project-description">Full-stack web application built with Laravel, featuring user authentication, CRUD operations, and REST API.</p>
+                            <div class="project-tech">
+                                <span>PHP</span>
+                                <span>Laravel</span>
+                                <span>MySQL</span>
+                                <span>Bootstrap</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 3 -->
+                    <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="project-header">
+                            <div class="project-type">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub Repository</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/princedwivedi2" target="_blank" title="View Source Code">
+                                    <i class="fas fa-code"></i>
+                                </a>
+                                <a href="#" target="_blank" title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">React Dashboard</h3>
+                            <p class="project-description">Interactive admin dashboard built with React, featuring data visualization, dark mode, and responsive layouts.</p>
+                            <div class="project-tech">
+                                <span>React</span>
+                                <span>Redux</span>
+                                <span>Chart.js</span>
+                                <span>Tailwind CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GitHub Profile Link -->
+                    <div class="github-profile-card glass-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="github-profile">
+                            <div class="github-avatar">
+                                <img src="https://github.com/princedwivedi2.png" alt="GitHub Profile Picture">
+                            </div>
+                            <div class="github-info">
+                                <h3>More Projects on GitHub</h3>
+                                <p>Explore more of my open source projects and contributions</p>
+                                <a href="https://github.com/princedwivedi2" class="github-btn" target="_blank">
+                                    <i class="fab fa-github"></i>
+                                    <span>View GitHub Profile</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Interactive Demo Section -->
     <section class="demo-section">
         <div class="container">
@@ -667,392 +769,7 @@
             </div>
         </div>
     </section>
-
-    <!-- Enhanced Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <!-- Section Header -->
-            <div class="section-header" data-aos="fade-up">
-                <div class="section-badge">
-                    <span>Portfolio</span>
-                </div>
-                <h2 class="section-title">
-                    Featured <span class="highlight">Projects</span>
-                </h2>
-                <div class="section-line"></div>
-                <p class="section-subtitle">
-                    A showcase of my best work, from concept to completion
-                </p>
-            </div>
-
-            <!-- Project Filters -->
-            <div class="project-filters" data-aos="fade-up" data-aos-delay="100">
-                <button class="filter-btn active" data-filter="all">
-                    <span>All Projects</span>
-                    <div class="filter-indicator"></div>
-                </button>
-                <button class="filter-btn" data-filter="fullstack">
-                    <span>Full-Stack</span>
-                    <div class="filter-indicator"></div>
-                </button>
-                <button class="filter-btn" data-filter="frontend">
-                    <span>Frontend</span>
-                    <div class="filter-indicator"></div>
-                </button>
-                <button class="filter-btn" data-filter="backend">
-                    <span>Backend</span>
-                    <div class="filter-indicator"></div>
-                </button>
-            </div>
-
-            <!-- Enhanced Projects Grid -->
-            <div class="projects-showcase">
-                <!-- Featured Project 1 - E-commerce Platform -->
-                <article class="project-card featured-card glass-card" data-category="fullstack" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="project-header">
-                        <div class="project-status">
-                            <span class="status-badge featured">Featured</span>
-                            <span class="category-badge fullstack">Full-Stack</span>
-                        </div>
-                        <div class="project-actions">
-                            <button class="action-btn favorite" title="Add to favorites">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <button class="action-btn share" title="Share project">
-                                <i class="fas fa-share-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="project-media">
-                        <div class="project-image-container">
-                            <img src="https://img.icons8.com/color/96/shopping-cart-loaded.png" alt="ModernShop E-commerce Platform" class="project-icon">
-                            <div class="project-overlay">
-                                <div class="overlay-content">
-                                    <div class="project-links">
-                                        <a href="#" class="project-btn primary" title="View Live Demo">
-                                            <i class="fas fa-external-link-alt"></i>
-                                            <span>Live Demo</span>
-                                        </a>
-                                        <a href="#" class="project-btn secondary" title="View Source Code">
-                                            <i class="fab fa-github"></i>
-                                            <span>Source</span>
-                                        </a>
-                                        <button class="project-btn tertiary" onclick="openProjectModal('ecommerce')" title="View Details">
-                                            <i class="fas fa-info-circle"></i>
-                                            <span>Details</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-content">
-                        <div class="project-meta">
-                            <div class="project-title-section">
-                                <h3 class="project-title">ModernShop E-commerce Platform</h3>
-                                <span class="project-role">Lead Full-Stack Developer</span>
-                            </div>
-                            <div class="project-metrics">
-                                <div class="metric">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>150% Sales ↗</span>
-                                </div>
-                                <div class="metric">
-                                    <i class="fas fa-clock"></i>
-                                    <span>1.2s Load</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <p class="project-description">
-                            A comprehensive e-commerce solution that revolutionized online retail for our client, 
-                            featuring real-time inventory, secure payments, and analytics dashboard.
-                        </p>
-
-                        <!-- Project Highlights -->
-                        <div class="project-highlights">
-                            <div class="highlight-item">
-                                <div class="highlight-icon">
-                                    <i class="fas fa-lightbulb"></i>
-                                </div>
-                                <div class="highlight-content">
-                                    <h4>Challenge</h4>
-                                    <p>Handle 10,000+ concurrent users during flash sales</p>
-                                </div>
-                            </div>
-                            <div class="highlight-item">
-                                <div class="highlight-icon">
-                                    <i class="fas fa-rocket"></i>
-                                </div>
-                                <div class="highlight-content">
-                                    <h4>Solution</h4>
-                                    <p>Microservices with Redis caching & real-time updates</p>
-                                </div>
-                            </div>
-                            <div class="highlight-item">
-                                <div class="highlight-icon">
-                                    <i class="fas fa-trophy"></i>
-                                </div>
-                                <div class="highlight-content">
-                                    <h4>Impact</h4>
-                                    <p>150% sales increase, 99.9% uptime achieved</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tech Stack -->
-                        <div class="tech-stack">
-                            <div class="tech-stack-header">
-                                <i class="fas fa-code"></i>
-                                <span>Tech Stack</span>
-                            </div>
-                            <div class="tech-tags">
-                                <span class="tech-tag primary">React</span>
-                                <span class="tech-tag secondary">Node.js</span>
-                                <span class="tech-tag accent">MongoDB</span>
-                                <span class="tech-tag success">Redis</span>
-                                <span class="tech-tag warning">Stripe</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project 2 - TaskFlow -->
-                <article class="project-card glass-card" data-category="fullstack" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="project-header">
-                        <div class="project-status">
-                            <span class="category-badge fullstack">Full-Stack</span>
-                        </div>
-                        <div class="project-actions">
-                            <button class="action-btn favorite" title="Add to favorites">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <button class="action-btn share" title="Share project">
-                                <i class="fas fa-share-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="project-media">
-                        <div class="project-image-container">
-                            <img src="https://img.icons8.com/color/96/task-planning.png" alt="TaskFlow Collaboration App" class="project-icon">
-                            <div class="project-overlay">
-                                <div class="overlay-content">
-                                    <div class="project-links">
-                                        <a href="#" class="project-btn primary">
-                                            <i class="fas fa-external-link-alt"></i>
-                                            <span>Live Demo</span>
-                                        </a>
-                                        <a href="#" class="project-btn secondary">
-                                            <i class="fab fa-github"></i>
-                                            <span>Source</span>
-                                        </a>
-                                        <button class="project-btn tertiary" onclick="openProjectModal('taskflow')">
-                                            <i class="fas fa-info-circle"></i>
-                                            <span>Details</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-content">
-                        <div class="project-meta">
-                            <div class="project-title-section">
-                                <h3 class="project-title">TaskFlow Collaboration</h3>
-                                <span class="project-role">Lead Frontend Developer</span>
-                            </div>
-                            <div class="project-metrics">
-                                <div class="metric">
-                                    <i class="fas fa-users"></i>
-                                    <span>500+ Teams</span>
-                                </div>
-                                <div class="metric">
-                                    <i class="fas fa-star"></i>
-                                    <span>4.8 Rating</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <p class="project-description">
-                            Real-time collaboration platform that improved productivity by 40% for remote teams 
-                            with intuitive task management and seamless communication.
-                        </p>
-
-                        <div class="tech-stack">
-                            <div class="tech-stack-header">
-                                <i class="fas fa-code"></i>
-                                <span>Tech Stack</span>
-                            </div>
-                            <div class="tech-tags">
-                                <span class="tech-tag primary">Vue.js</span>
-                                <span class="tech-tag secondary">Express</span>
-                                <span class="tech-tag accent">Socket.io</span>
-                                <span class="tech-tag success">PostgreSQL</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project 3 - AI Chatbot -->
-                <article class="project-card glass-card" data-category="backend" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="project-header">
-                        <div class="project-status">
-                            <span class="category-badge backend">Backend</span>
-                        </div>
-                        <div class="project-actions">
-                            <button class="action-btn favorite" title="Add to favorites">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <button class="action-btn share" title="Share project">
-                                <i class="fas fa-share-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="project-media">
-                        <div class="project-image-container">
-                            <img src="https://img.icons8.com/color/96/chatbot.png" alt="AI Chatbot" class="project-icon">
-                            <div class="project-overlay">
-                                <div class="overlay-content">
-                                    <div class="project-links">
-                                        <a href="#" class="project-btn primary">
-                                            <i class="fas fa-external-link-alt"></i>
-                                            <span>Live Demo</span>
-                                        </a>
-                                        <a href="#" class="project-btn secondary">
-                                            <i class="fab fa-github"></i>
-                                            <span>Source</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-content">
-                        <div class="project-meta">
-                            <div class="project-title-section">
-                                <h3 class="project-title">AI-Powered Chatbot</h3>
-                                <span class="project-role">Backend Developer</span>
-                            </div>
-                            <div class="project-metrics">
-                                <div class="metric">
-                                    <i class="fas fa-robot"></i>
-                                    <span>95% Accuracy</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <p class="project-description">
-                            Intelligent chatbot using natural language processing for customer support 
-                            and automated responses across multiple business domains.
-                        </p>
-
-                        <div class="tech-stack">
-                            <div class="tech-stack-header">
-                                <i class="fas fa-code"></i>
-                                <span>Tech Stack</span>
-                            </div>
-                            <div class="tech-tags">
-                                <span class="tech-tag primary">Python</span>
-                                <span class="tech-tag secondary">Django</span>
-                                <span class="tech-tag accent">TensorFlow</span>
-                                <span class="tech-tag success">React</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project 4 - Fitness Tracker -->
-                <article class="project-card glass-card" data-category="frontend" data-aos="zoom-in" data-aos-delay="500">
-                    <div class="project-header">
-                        <div class="project-status">
-                            <span class="category-badge frontend">Frontend</span>
-                        </div>
-                        <div class="project-actions">
-                            <button class="action-btn favorite" title="Add to favorites">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <button class="action-btn share" title="Share project">
-                                <i class="fas fa-share-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="project-media">
-                        <div class="project-image-container">
-                            <img src="https://img.icons8.com/color/96/workout.png" alt="Fitness Tracker" class="project-icon">
-                            <div class="project-overlay">
-                                <div class="overlay-content">
-                                    <div class="project-links">
-                                        <a href="#" class="project-btn primary">
-                                            <i class="fas fa-external-link-alt"></i>
-                                            <span>Live Demo</span>
-                                        </a>
-                                        <a href="#" class="project-btn secondary">
-                                            <i class="fab fa-github"></i>
-                                            <span>Source</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-content">
-                        <div class="project-meta">
-                            <div class="project-title-section">
-                                <h3 class="project-title">Fitness Tracker</h3>
-                                <span class="project-role">Frontend Developer</span>
-                            </div>
-                            <div class="project-metrics">
-                                <div class="metric">
-                                    <i class="fas fa-mobile-alt"></i>
-                                    <span>Mobile App</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <p class="project-description">
-                            Comprehensive fitness tracking application with workout planning, 
-                            progress monitoring, and social features for fitness enthusiasts.
-                        </p>
-
-                        <div class="tech-stack">
-                            <div class="tech-stack-header">
-                                <i class="fas fa-code"></i>
-                                <span>Tech Stack</span>
-                            </div>
-                            <div class="tech-tags">
-                                <span class="tech-tag primary">React Native</span>
-                                <span class="tech-tag secondary">Firebase</span>
-                                <span class="tech-tag accent">Chart.js</span>
-                                <span class="tech-tag success">Redux</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-
-            <!-- View More Section -->
-            <div class="projects-footer" data-aos="fade-up" data-aos-delay="600">
-                <div class="footer-content">
-                    <h3>Want to see more?</h3>
-                    <p>Check out my GitHub for additional projects and contributions</p>
-                    <a href="https://github.com/princedwivedi2" class="view-more-btn glass-btn" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span>View All Projects</span>
-                        <div class="btn-glow"></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="contact-shapes">
@@ -1174,11 +891,7 @@
                             </div>
                             
                             <div class="form-footer">
-                                <div class="form-privacy">
-                                    <input type="checkbox" id="privacy" name="privacy" required>
-                                    <label for="privacy">I agree with the <a href="#privacy-policy">Privacy Policy</a></label>
-                                    <span class="form-error" id="privacyError"></span>
-                                </div>
+                              
                                 
                                 <button type="submit" class="btn btn-primary glass-btn">
                                     <span class="btn-text">Send Message</span>
@@ -1206,7 +919,7 @@
                                 title="Prince's Location in Lucknow, India"
                                 class="location-map">
                             </iframe>
-                            <div class="map-overlay">
+                            <div>
                                 <div class="location-badge">
                                     <i class="fas fa-map-marker-alt"></i>
                                     <span>Lucknow, UP, India</span>
@@ -1256,34 +969,7 @@
                         </div>
                     </div>
                     
-                    <!-- Working Hours -->
-                    <div class="hours-card glass-card">
-                        <div class="card-header">
-                            <h3>
-                                <i class="fas fa-clock"></i>
-                                Working Hours
-                            </h3>
-                        </div>
-                        
-                        <div class="hours-content">
-                            <div class="hours-item">
-                                <div class="day">Monday - Friday</div>
-                                <div class="time">9:00 AM - 6:00 PM</div>
-                            </div>
-                            <div class="hours-item weekend">
-                                <div class="day">Saturday</div>
-                                <div class="time">10:00 AM - 4:00 PM</div>
-                            </div>
-                            <div class="hours-item closed">
-                                <div class="day">Sunday</div>
-                                <div class="time">Closed</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+ 
         <!-- Form Success Message (Hidden by default) -->
         <div id="formSuccess" class="form-success-message">
             <div class="success-content glass-card">
@@ -1303,13 +989,13 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
+        
             <div class="footer-content">
                 <p>&copy; 2024 Prince. All rights reserved.</p>
                 <p>Designed with <img src="https://img.icons8.com/color/16/like.png" alt="love"> and built with passion</p>
                 <div class="footer-gradient"></div>
             </div>
-        </div>
+        
     </footer>
 
     <!-- Success/Error Messages -->
